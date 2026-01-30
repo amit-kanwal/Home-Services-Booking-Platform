@@ -1,0 +1,42 @@
+.hero-section-container{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+
+.hero{
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.headline{
+    font-size: 3rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subheadline{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: rgb(58, 58, 58);
+    font-weight: 500;
+}
+
+.blue{
+    display: inline;
+    color: rgb(0, 120, 212);
+}
+
+
+

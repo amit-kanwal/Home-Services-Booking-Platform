@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    background-color: rgb(250, 250, 250);
+    border-bottom: rgb(224, 224, 224);
+    position: sticky;
+}
+
+.logoContainer{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+
+img{
+    height: 65%;
+}
+
+.logo{
+    font-family: 'Space Grotesk';
+    font-weight:600;
+    font-size: 1.3rem;
+    margin: 0 5px;
+}
+
+.nav-menu ul{
+    display: flex;
+    width: max-content;
+    align-items: center;
+    list-style: none;
+    height: auto;
+    width: inherit;
+    justify-content: space-between;
+}
+
+.nav-menu{
+    display: flex;
+    align-items: center;   
+    width: 50%;
+}
+
+.nav-menu ul li a{
+    color: black;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.nav-link a:hover{
+    color: grey;
+}
+
+.nav-btn{
+    display: flex;
+    align-items: center;
+}
+
+.btn{
+    border: none;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+    color: white;
+}
+
+#logIn{
+    background-color: rgb(0, 120, 212);
+}
+
+#signUp{
+    background-color: black;
+}
+
+.btn:hover{
+    cursor:pointer;
+    color: black;
+    background-color: white !important;
+    border: 1px solid gray;
+}
+
+@media only screen and (max-width: 600px){
+    .nav-menu{
+        display: none;
+    }
+
+    .nav-btn{
+        display: none;
+    }
+}
