@@ -1,7 +1,20 @@
 import './Home.css'
-import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import Searchbar from '../../components/Searchbar/SearchBar'
+import CategoryList from '../../components/CategoryList/CategoryList'
 
 function Home() {
+  const [categories, setCategories] = useState([])
+
+    useEffect(()=>{
+        axios.get('/api/categories')
+        .then(res => setCategories(res.data))
+        .catch(err => console.log("error"))
+
+        console.log(categories)
+    }, [])
+
   return (
     <>
       <section className="hero-section">
@@ -12,15 +25,11 @@ function Home() {
             </div>
               <div><span>Your Fingertips</span></div></h2>
             <h2 className="subheadline">Find best Home Service/Repairs near you <br /> <span>Near You</span></h2>
-            <h2></h2>
           </div>
-          <div className="search">
-            <input type="search" name="search" id="search" />
-            <SearchIcon className="search-icon" />
-          </div>
+            <Searchbar/> 
         </div>
-
       </section>
+      <CategoryList categoryList={categories}/>
     </>
   )
 }

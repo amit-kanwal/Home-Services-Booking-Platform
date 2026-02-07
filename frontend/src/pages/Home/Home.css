@@ -1,5 +1,15 @@
+.hero{
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .hero-section-container{
-    height: 60vh;
+    height: max-content;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,8 +17,9 @@
     width: 100vw;
 }
 
-.hero{
-    width: inherit;
+
+.hero-section{
+    width: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,6 +47,13 @@
 .blue{
     display: inline;
     color: rgb(0, 120, 212);
+}
+
+.search{
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 

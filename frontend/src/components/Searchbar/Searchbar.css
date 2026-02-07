@@ -1,0 +1,39 @@
+.search{
+    border: 0.5px solid rgb(206, 205, 205);
+    box-shadow: 1px 1px 1px rgb(206, 205, 205);
+    border-radius: 30px;
+    padding: 2px 0 2px 5px;
+    margin: 10px;
+    height:45px;
+    box-sizing: border-box;
+}
+
+.search input {
+    border: none;
+    font-size: 1.5 rem;
+    height: 30px;
+    padding: auto 10px;
+    width: 80%;   
+    margin: auto; 
+}
+
+.search input:focus{
+    border: none;
+    outline: none;
+    padding: 2px;
+}
+
+.search button{
+    border: none;
+    height: inherit;
+    width: 70px;
+    border-radius: 0 30px 30px 0;
+    background-color:blue;
+}
+
+.search-icon{
+    height: inherit;
+    color: white;
+}
+
+
