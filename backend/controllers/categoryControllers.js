@@ -1,22 +1,26 @@
-import prisma from "../prisma/prismaClient.js"
+import pool from '../config/db.js'
 
 export const getCategories = async (req, res)=>{
-    res.set("Cache-Control", "no-store")
-    const categories = await prisma.serviceCategory.findMany({
-    orderBy: {
-      id: "asc",
-    },
-  });
-
-    res.json(categories);
+  try{
+    const result = await pool.query(
+    'SELECT * FROM "ServiceCategory" ORDER BY id ASC'
+  );
+  res.status(200).json(result.rows)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  } 
 }
 
 export const createCategory = async(req, res) =>{
-    const {name, icon, color} = res.body;
+    const {name, icon, color} = req.body;
 
-    const category = await prisma.serviceCategory.create({
-        data : {name, icon, color},
-    })
+    const result = await pool.query(
+      `INSERT INTO "ServiceCategory" (name, icon, color)
+       VALUES ($1, $2, $3)
+       RETURNING *`,
+      [name, icon, color]
+    );
 
-    res.json(category);
+    res.json(result.rows[0]);
 }
