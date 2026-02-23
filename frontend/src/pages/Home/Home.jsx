@@ -1,5 +1,6 @@
 import './Home.css'
 import axios from 'axios'
+import Navbar from '../../components/Navbar/Navbar'
 import { useEffect, useState } from 'react'
 import Searchbar from '../../components/Searchbar/SearchBar'
 import CategoryList from '../../components/CategoryList/CategoryList'
@@ -27,6 +28,7 @@ function Home() {
 
   return (
     <>
+      <Navbar></Navbar>
       <section className="hero-section">
         <div className="hero-section-container">
           <div className="hero">
