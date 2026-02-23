@@ -5,8 +5,7 @@ function Navbar() {
     return (
         <>
             <nav>
-
-                <div className='logoContainer'><img src={logo} alt="logo" />
+                    <div className='logoContainer'><img src={logo} alt="logo" />
                     <span className="logo">SERVEASE</span></div>
                 <div className="nav-menu" >
                     <ul>
@@ -22,7 +21,7 @@ function Navbar() {
                     <a href="/">
                         <button className="btn" id="signUp">Get Started</button>
                     </a>
-                </div>
+                </div> 
             </nav>
         </>
     )

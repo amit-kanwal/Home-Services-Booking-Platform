@@ -6,14 +6,24 @@ import CategoryList from '../../components/CategoryList/CategoryList'
 
 function Home() {
   const [categories, setCategories] = useState([])
+  const [providerInfo, setProviderInfo] = useState([])
 
     useEffect(()=>{
-        axios.get('/api/categories')
+        getCategoriesList();
+        getProviderInfo();
+    }, [])
+
+    const getCategoriesList = ()=>{
+      axios.get('/api/categories')
         .then(res => setCategories(res.data))
         .catch(err => console.log("error"))
+    }
 
-        console.log(categories)
-    }, [])
+    const getProviderInfo = ()=>{
+      axios.get('/api/serviceProviderinfo')
+        .then(res => setProviderInfo(res.data))
+        .catch(err => console.log("error"))
+    }
 
   return (
     <>
@@ -24,7 +34,7 @@ function Home() {
               Trusted <span className="blue">Home Services</span> At
             </div>
               <div><span>Your Fingertips</span></div></h2>
-            <h2 className="subheadline">Find best Home Service/Repairs near you <br /> <span>Near You</span></h2>
+            <h2 className="subheadline">Find best home services/repairs near you</h2>
           </div>
             <Searchbar/> 
         </div>
