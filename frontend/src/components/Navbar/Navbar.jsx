@@ -22,10 +22,10 @@ function Navbar() {
                     </ul>
                 </div>
                 <div className="nav-btn">
-                    <Link to='/'>
+                    <Link to='/Login'>
                         <button className="btn" id="logIn">Log In</button>
                     </Link>
-                    <Link to="/">
+                    <Link to="/Signup">
                         <button className="btn" id="signUp">Get Started</button>
                     </Link>
                 </div>
