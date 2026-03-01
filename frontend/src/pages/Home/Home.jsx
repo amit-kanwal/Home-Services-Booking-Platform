@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import { useEffect, useState } from 'react'
 import Searchbar from '../../components/Searchbar/SearchBar'
 import CategoryList from '../../components/CategoryList/CategoryList'
+import Footer from '../../components/Footer/Footer'
 
 function Home() {
   const [categories, setCategories] = useState([])
@@ -42,6 +43,7 @@ function Home() {
         </div>
       </section>
       <CategoryList categoryList={categories}/>
+      <Footer/>
     </>
   )
 }
