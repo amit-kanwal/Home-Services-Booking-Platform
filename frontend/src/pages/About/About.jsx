@@ -20,14 +20,16 @@ function About() {
             <li>Easy Online Booking</li>
             <li>Compare providers online</li>
             <li>Transparent Princing</li>
+            <li>Smart Provider Matching</li>
             <li>Multiple Service Category</li>
           </ul>
 
-        <h2>What to choose us?</h2>
+        <h2>Why to choose us?</h2>
           <ul className="list-items">
             <li>User Friendly Platform</li>
             <li>Good User Experience</li>
             <li>Quick Response Time</li>
+            <li>Enhanced Provider Matching</li>
             <li>Secure and Safe Service Experience</li>
           </ul>
         <h2>Our Vision</h2>
