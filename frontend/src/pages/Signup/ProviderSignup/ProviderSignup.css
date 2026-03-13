@@ -166,7 +166,7 @@
 
 @media only screen and (max-width: 400px){
     .provider-signup-form-container{
-    padding: 10px;
+    padding: 20px;
     }     
     .signup-form-element{
         flex-direction: column;
@@ -193,6 +193,22 @@
     font-size: 1.2rem;
 }
 
+#address{
+    width: 90%;
+}
+
+#provider-about{
+    width: 90%;
+}
+}
+
+.alert-signup{
+    width: max-content;
+    justify-content: space-between;
+    padding: 5px;
+    margin: auto;
+    background-color: rgb(245, 101, 101);
+    border-radius: 10px;
 }
 
 

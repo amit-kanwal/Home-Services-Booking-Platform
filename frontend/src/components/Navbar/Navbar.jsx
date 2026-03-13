@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import "./Navbar.css";
 import logo from "/logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState , useEffect} from "react";
 
-function Navbar() {
+
+function Navbar({scroolToServices}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDisplay, setDisplay] = useState(false);
+  const currentPage = useLocation();
+  const hideServiceIcon = currentPage.pathname === "/About";
 
   useEffect(() => {
     if (isDisplay) {
@@ -35,9 +38,11 @@ function Navbar() {
             <li className="nav-link">
               <Link to="/">Home</Link>
             </li>
-            <li className="nav-link">
-              <Link to="/Services">Services</Link>
+            {!hideServiceIcon && (
+              <li className="nav-link">
+              <Link onClick={scroolToServices}>Services</Link>
             </li>
+            )}
             <li className="nav-link">
               <Link to="/About">About</Link>
             </li>
@@ -85,9 +90,8 @@ function Navbar() {
               Home
             </Link>
             <Link
-              to="/Services"
               className="drop-link"
-              onClick={() => setIsOpen(false)}
+              onClick={scroolToServices}
             >
               Services
             </Link>

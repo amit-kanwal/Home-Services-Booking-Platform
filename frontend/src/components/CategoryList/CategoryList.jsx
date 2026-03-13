@@ -7,6 +7,7 @@ import FormatPaintIcon from "@mui/icons-material/FormatPaint";
 import GrassIcon from '@mui/icons-material/Grass';
 import LocalCarWashIcon from '@mui/icons-material/LocalCarWash';
 import "./CategoryList.css";
+import{Link} from "react-router-dom"
 
 const icons = {
   cleaning: (
@@ -67,15 +68,19 @@ const icons = {
   ),
 };
 
-function CategoryList({ categoryList }) {
+function CategoryList({ categoryList , changeCategory,scroolToServices}) {
+  const handleCategoryListOnClick = (category)=>{
+    changeCategory(category.name);
+    scroolToServices();
+  }
   return (
     <>
       <div className="all-cat">
         <h2 >All Categories</h2>     
       <div className="icon">
         {categoryList.map((category, index) => (
-          <span
-            key={index}
+          <div key={index} onClick={()=>handleCategoryListOnClick(category)}>
+            <span
             className="material-symbols-outlined icon-container"
           >
             <span style={{ color: category.color }}>
@@ -83,6 +88,7 @@ function CategoryList({ categoryList }) {
             </span>
             <h2>{category.name}</h2>
           </span>
+          </div> 
         ))}
       </div>
       </div>

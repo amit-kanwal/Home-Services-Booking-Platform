@@ -1,20 +1,32 @@
 import "./Home.css";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef} from "react";
 import Searchbar from "../../components/Searchbar/SearchBar";
 import CategoryList from "../../components/CategoryList/CategoryList";
 import Footer from "../../components/Footer/Footer";
 import Typewriter from "typewriter-effect";
+import ServiceProviderList from "../../components/ServiceProviderList/ServiceProviderList";
 
 function Home() {
   const [categories, setCategories] = useState([]);
   const [providerInfo, setProviderInfo] = useState([]);
+  const [category, setCategory] = useState("Popular")
+  const serviceRef = useRef("null");
+
+  const scroolToServices = ()=>{
+    serviceRef.current.scrollIntoView({
+      behavior: "smooth"
+    });
+  };
 
   useEffect(() => {
     getCategoriesList();
-    getProviderInfo();
   }, []);
+
+  useEffect(()=>{
+    getProviderInfo(category);
+  },[category])
 
   const getCategoriesList = () => {
     axios
@@ -23,16 +35,16 @@ function Home() {
       .catch((err) => console.log("error"));
   };
 
-  const getProviderInfo = () => {
+  const getProviderInfo = (category) => {
     axios
-      .get("/api/serviceProviderinfo")
+      .get(`/api/serviceProviderinfo?category=${category}`)
       .then((res) => setProviderInfo(res.data))
       .catch((err) => console.log("error"));
   };
 
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar scroolToServices={scroolToServices}></Navbar>
       <section className="hero-section">
         <div className="hero-section-container">
           <div className="hero">
@@ -65,7 +77,8 @@ function Home() {
           </span> 
         </div>
       </section>
-      <CategoryList categoryList={categories} />
+      <CategoryList categoryList={categories} changeCategory={setCategory} scroolToServices={scroolToServices}/>
+      <ServiceProviderList providerInfo={providerInfo} currentCategory={category} ref={serviceRef}/>   
       <Footer />
     </>
   );
