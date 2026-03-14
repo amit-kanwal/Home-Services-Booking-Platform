@@ -24,11 +24,12 @@ export const providerSignup = async (req, res) => {
       [username],
     );
 
-    if (checkUsername.rows.length > 0) {
-      return res.status(404).json({
-        message: "Username already taken",
-      });
-    }
+  if (checkUsername.rows.length > 0) {
+  return res.status(400).json({
+    field: "username",
+    message: "Username already exists" 
+  }); 
+  }
 
     const checkEmail = await pool.query(
       "SELECT id FROM users WHERE email=$1",
@@ -36,10 +37,22 @@ export const providerSignup = async (req, res) => {
     );
 
     if (checkEmail.rows.length > 0) {
-      return res.status(404).json({
-        message: "Email already registered",
-      });
-    }
+  return res.status(400).json({
+    field: "email",
+  }); 
+  }
+
+  const checkPhone = await pool.query(
+  "SELECT user_id FROM service_provider_info WHERE contact=$1",
+  [phone],
+);
+
+if (checkPhone.rows.length > 0) {
+  return res.status(400).json({
+    field: "phone",
+    message: "Phone number already exists"
+  });
+}
 
     const hashedPassword = await bycrpt.hash(password, 10);
 
