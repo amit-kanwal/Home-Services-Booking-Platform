@@ -7,34 +7,25 @@ import Footer from "../../components/Footer/Footer";
 
 function SearchResult() {
   const { category } = useParams();
-  const navigate = useNavigate();
   const [providerInfo, setProviderInfo] = useState([]);
-  const [categoryName, selectCategoryName] = useState(""); 
+  const [categoryName, setCategoryName] = useState(""); 
 
-  const handleCategoryChange = (e) => {
-    navigate(`/Services/${e.target.value}`);
-  };
-
-  const categoryObj = {
-    Popular : "Popular",
-    Cleaning : "Cleaning",
-    Repair : "Repairing",
-    Plumbing : "Plumbling",
-    Electrical  : "Electrical Work",
-    Shifting : "Shifting",
-    Gardening : "Gardening",
-    Painting : "Painting",
-    PestControl : "Pest Control",
+  const parameter = ()=>{
+    let str = category;
+    let converted = str.charAt(0).toUpperCase();
+    converted = converted + str.slice(1).toLowerCase();
+    let trimmed = converted.trim();
+    setCategoryName(trimmed);
   }
 
   useEffect(() => {
-    selectCategoryName(categoryObj[category])
+    parameter();
     getProviderInfo();
-  }, [category]);
+  }, [categoryName]);
 
   const getProviderInfo = () => {
     axios
-      .get(`/api/serviceProviderinfo?category=${category}`)
+      .get(`/api/serviceProviderinfo?category=${categoryName}`)
       .then((res) => setProviderInfo(res.data))
       .catch((err) => console.log("error"));
   };
@@ -44,12 +35,12 @@ function SearchResult() {
       <Navbar />
       <div className="services-top">
         <div className="service-top-heading">
-          <h2 style={{ fontWeight: "500", marginTop: "20px", padding: "0 10px", color: "blue" , fontSize: "1rem"}}>
-          Showiing search results for {categoryName} 
+          <h2 style={{ fontWeight: "500", marginTop: "20px", padding: "0 10px" , fontSize: "1.5rem"}}>
+          Showing search results for {category} 
         </h2>
         </div >
       </div>
-      <ServiceProviderList providerInfo={providerInfo} />
+      <ServiceProviderList providerInfo={providerInfo} text="No result found" />
       <Footer />
     </div>
   );

@@ -71,7 +71,7 @@ function Services() {
         </span>
       </div>
 
-      <ServiceProviderList providerInfo={providerInfo} />
+      <ServiceProviderList providerInfo={providerInfo} text="No provider found"/>
       <Footer />
     </div>
   );

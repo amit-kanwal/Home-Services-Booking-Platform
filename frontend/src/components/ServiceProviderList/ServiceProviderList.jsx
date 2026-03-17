@@ -1,7 +1,7 @@
 import "./ServiceProvider.css";
 import { Link } from "react-router-dom";
 
-const ServiceProviderList = ({ providerInfo }) => {
+const ServiceProviderList = ({ providerInfo , text }) => {
   return (
     <>
       <div className="popular-services">
@@ -37,7 +37,7 @@ const ServiceProviderList = ({ providerInfo }) => {
       </div>
     {providerInfo.length == 0 && (
         <div className="no-provider" style={{display: "flex" , justifyContent: "center", alignItems: "center" , fontSize: "2rem"}}>
-            No provider found
+            {text}
         </div>
     )}
     </>

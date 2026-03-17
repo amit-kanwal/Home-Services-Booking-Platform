@@ -7,34 +7,11 @@ function Searchbar() {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate()
   const handleSearchOnchange = (e) => {
-    setSearchValue(e.target.value);
-    let searchData = searchValue.toLowerCase();
-
-    if(categoryObj[searchData]){
-
-    }else{
-
-    }
-  };
-
-  const categoryObj = {
-    popular: "Popular",
-    cleaning: "Cleaning",
-    clean: "Cleaning",
-    repair: "Repair",
-    repairs: "Repair",
-    repairing: "Repair",
-    plumbing: "Plumbling",
-    electrical: "Electrical",
-    shifting: "Shifting",
-    gardening: "Gardening",
-    painting: "Painting",
-    paint: "Painting",
-    pestcontrol: "PestControl",
+    setSearchValue(e.target.value)
   };
 
   const handleSearch = ()=>{
-    navigate(`/SerchResult/${categoryObj[searchValue]}`)
+    navigate(`/SerchResult/${searchValue}`)
   }
 
   return (
