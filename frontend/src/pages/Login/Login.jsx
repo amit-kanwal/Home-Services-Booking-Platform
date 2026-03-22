@@ -38,7 +38,7 @@ function Login() {
                     <div>Password</div>
                     <input type="password" name="password" id="password" value={loginData.password} onChange={handleLoginFormChange}/>
                     <button className="login-btn" type="submit">Log In</button>
-                    <div className="signup-text">Don't have a account <Link to='/Signup'>Sign Up Now</Link></div>
+                    <div className="signup-text"><div className='account-text'>Don't have an <span>account</span> </div><Link to='/Signup'>Sign Up Now</Link></div>
                 </div>
             </form>
         </div>

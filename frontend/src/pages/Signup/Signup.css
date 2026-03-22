@@ -69,7 +69,7 @@
         border-radius: 0;
         margin: 0;
         width: 100vw;
-        background: none;
+        padding: 20px;
     }
     form{
         margin: 0;
@@ -81,9 +81,8 @@
     }
 }
 
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 300px){
     .choose-page{
-        height: 100%;
-        padding: 20px;
+        background: white;
     }
 }

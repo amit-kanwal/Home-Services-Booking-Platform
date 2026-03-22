@@ -44,3 +44,11 @@ display: flex;
     transform: translateY(-4px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 }
+
+
+@media only screen and (max-width: 300px) {
+    .icon {
+        justify-content: space-around;
+        gap: 10px;
+    }
+}

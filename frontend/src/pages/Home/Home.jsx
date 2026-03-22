@@ -1,7 +1,7 @@
 import "./Home.css";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
-import { useEffect, useState , useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 import Searchbar from "../../components/Searchbar/Searchbar.jsx";
 import CategoryList from "../../components/CategoryList/CategoryList";
 import Footer from "../../components/Footer/Footer";
@@ -11,12 +11,12 @@ import ServiceProviderList from "../../components/ServiceProviderList/ServicePro
 function Home() {
   const [categories, setCategories] = useState([]);
   const [providerInfo, setProviderInfo] = useState([]);
-  const [category, setCategory] = useState("Popular")
+  const [category, setCategory] = useState("Popular");
   const serviceRef = useRef("null");
 
-  const scroolToServices = ()=>{
+  const scroolToServices = () => {
     serviceRef.current.scrollIntoView({
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
@@ -24,9 +24,9 @@ function Home() {
     getCategoriesList();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getProviderInfo(category);
-  },[category])
+  }, [category]);
 
   const getCategoriesList = () => {
     axios
@@ -44,44 +44,61 @@ function Home() {
 
   return (
     <>
-      <Navbar ></Navbar>
+      <Navbar></Navbar>
       <section className="hero-section">
         <div className="hero-section-container">
           <div className="hero">
             <h2 className="headline">
-              <div>
-                Trusted <span className="blue">Home Services</span> At
+              <div className="headline-first">
+                <span className="headline-top-container">
+                  <span>Trusted </span>
+                  <span className="blue">
+                    <span>Home </span>
+                    <span>Services</span>
+                  </span>
+                </span>
+                <span> At</span>
               </div>
               <div>
-                <span>Your Fingertips</span>
+                <span className="second-headline">
+                  {" "}
+                  <span>Your </span>
+                  <span>Fingertips</span>
+                </span>
               </div>
             </h2>
             <h2 className="subheadline">
-              Find best home services/repairs near you
+              Find best home services <span className="slash-container">/</span><span>repairs near you</span>
             </h2>
           </div>
-          <Searchbar ref={serviceRef}/>
+          <Searchbar ref={serviceRef} />
         </div>
-        <div className="type-writer">
+        <div className="type-writer-container">
+          <div className="type-writer">
           <span>Avaliable at </span>
           <span className="type-writer-text">
-            <Typewriter 
-            style={{color:"var(--primary-color) !important"}}
-            options={{
-              strings: ["Srinagar", "Chauras", "Srikot", "Kirtinagar"],
-              autoStart: true,
-              loop: true,
-              pauseFor : 3000
-            }}
-          />
-          </span> 
+            <Typewriter
+              style={{ color: "var(--primary-color) !important" }}
+              options={{
+                strings: ["Srinagar", "Chauras", "Srikot", "Kirtinagar"],
+                autoStart: true,
+                loop: true,
+                pauseFor: 3000,
+              }}
+              className="type-writer-txt"
+            />
+          </span>
+        </div>
         </div>
       </section>
-      <CategoryList categoryList={categories}/>
-      <h2 style={{fontWeight : "500", marginTop: "20px", padding : "0 10px"}}>
-          {category} Providers
+      <CategoryList categoryList={categories} />
+      <h2 style={{ fontWeight: "500", marginTop: "20px", padding: "0 10px" }}>
+        {category} Providers
       </h2>
-      <ServiceProviderList providerInfo={providerInfo} currentCategory={category} />   
+      <ServiceProviderList
+        providerInfo={providerInfo}
+        currentCategory={category}
+      />
       <Footer />
     </>
   );

@@ -71,13 +71,15 @@ form div input:focus{
 }
 
 @media only screen and (max-width: 400px){
-    body{
-        background: none;
+    .login-container{
+        background: white;
     }
+    
     .login-form{
         border-radius: 0;
         margin: 0;
         width: 100vw;
+        height: 100%;
     }
     form{
         margin: 0;
@@ -96,12 +98,14 @@ form div input:focus{
     }
     .signup-text a{
         display: block;
+        font-size: 1rem;
     }
 }
 
-@media only screen and (max-width: 400px){
-    .login-container{
-        height: 100%;
-        padding: 20px;
+@media only screen and (max-width: 300px){
+    .account-text{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

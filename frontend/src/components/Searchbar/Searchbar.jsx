@@ -11,24 +11,31 @@ function Searchbar() {
   };
 
   const handleSearch = ()=>{
-    navigate(`/SerchResult/${searchValue}`)
+    if(searchValue.length >0){
+      navigate(`/SerchResult/${searchValue}`)
+    } 
   }
 
   return (
-    <div className="search">
-      <SearchIcon style={{ display: "none" }} />
+    <div className="search-container">
+      <div className="search">
       <input
         type="search"
         name="search"
         id="search"
-        placeholder="Search services by Category"
+        placeholder="Search by Category"
         value={searchValue}
         onChange={handleSearchOnchange}
+        className="search-input"
       />
-      <button onClick={handleSearch}>
+      <button onClick={handleSearch} className="search-btn-first search-btn">
         <SearchIcon className="search-icon" />
       </button>
     </div>
+    <button onClick={handleSearch} className="search-btn-second search-btn">
+        <SearchIcon className="search-icon" />
+    </button>
+    </div>  
   );
 }
 
