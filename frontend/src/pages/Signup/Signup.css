@@ -86,3 +86,9 @@
         background: white;
     }
 }
+
+@media only screen and (max-height: 400px){
+    .choose-page{
+        height: 350px;
+    }
+}

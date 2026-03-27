@@ -1,5 +1,5 @@
 import './Login.css'
-import {Link} from 'react-router-dom'
+import {Link , useNavigate} from 'react-router-dom'
 import {useState} from 'react'
 import axios from "axios";
 
@@ -8,6 +8,8 @@ function Login() {
         username: "",
         password: ""
     })
+
+    const navigate = useNavigate()
 
     const handleLoginFormChange = (e) =>{
         setLoginData({
@@ -21,7 +23,16 @@ function Login() {
 
         try {
             const response = await axios.post("/api/login", loginData);
-            console.log(response);
+            const data = response.data;
+            localStorage.setItem("token" , data.token)
+            const user = {
+                id : data.id,
+                role : data.role
+            }
+            localStorage.setItem("user", JSON.stringify(user));
+            if(data.role === 'customer'){
+                navigate('/Customer_dashboard')
+            }
         } catch(err){
             console.log(err);
         }

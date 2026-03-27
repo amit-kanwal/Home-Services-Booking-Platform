@@ -1,5 +1,4 @@
 import GetLocation from "../../../Utils/GetLocation.js";
-import { compressImage } from "../../../Utils/CompressImage.js";
 import { useState, useEffect , useRef} from "react";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
@@ -64,7 +63,6 @@ function CustomerSignup() {
       setLocationText("Location Obtained");
       setLocationBtnBorder("2px solid green");
     } catch (error) {
-      setlocationErr(error);
       alert("Cannot fetch your location");
     }
   };

@@ -72,7 +72,7 @@ form div input:focus{
 
 @media only screen and (max-width: 400px){
     .login-container{
-        background: white;
+        height: 100%;
     }
     
     .login-form{
@@ -107,5 +107,11 @@ form div input:focus{
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+}
+
+@media only screen and (max-height: 300px){
+    .login-container{
+        height: 400px;
     }
 }
