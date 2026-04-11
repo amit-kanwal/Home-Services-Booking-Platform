@@ -89,7 +89,7 @@ function CategoryList({ categoryList}) {
             <span style={{ color: category.color }}>
               {icons[category.icon]}
             </span>
-            <h2>{category.name}</h2>
+            <h2>{(category.name  === "PestControl") ? "Pest Control" : category.name}</h2>
           </span>
           </div> 
         ))}

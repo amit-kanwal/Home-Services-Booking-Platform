@@ -4,10 +4,10 @@ import PlumbingIcon from "@mui/icons-material/Plumbing";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import FormatPaintIcon from "@mui/icons-material/FormatPaint";
-import GrassIcon from '@mui/icons-material/Grass';
-import PestControlIcon from '@mui/icons-material/PestControl';
-import{useNavigate} from "react-router-dom"
-import "./categoryListVirtual.css"
+import GrassIcon from "@mui/icons-material/Grass";
+import PestControlIcon from "@mui/icons-material/PestControl";
+import { useNavigate } from "react-router-dom";
+import "./categoryListVirtual.css";
 
 const icons = {
   cleaning: (
@@ -68,35 +68,45 @@ const icons = {
   ),
 };
 
-
-function CategoryListVirtual({categoryList}) {
+function CategoryListVirtual({ categoryList, setCategory, currentCategory }) {
   const navigate = useNavigate();
-  
-    const handleCategoryListOnClick = (category)=>{
-      navigate(`/Services/${category.name}`)
-    }
-  
-    return (
-      <>
-        <div className="all-cat-login">
-          <h2 className="all-cat-heading">Categories</h2>     
+
+  const handleCategoryClick = (name) => {
+    setCategory(name);
+  };
+
+  return (
+    <>
+      <div className="all-cat-login">
+        <h2 className="all-cat-heading">Categories</h2>
         <div className="login-category-icon">
           {categoryList.map((category, index) => (
-            <div key={index}> 
+            <div key={index}>
               <div
-              className="material-symbols-outlined login-icon-container"
-            >
-              <span className="login-category-icon-container" style={{ color: category.color }}>
-                {icons[category.icon]}
-              </span>
-              <p className="login-category-name">{category.name}</p>
+                className={`login-icon-container ${
+                  currentCategory === category.name ? "active-category" : ""
+                }`}
+                onClick={() => handleCategoryClick(category.name)}
+              >
+                <span
+                  className="login-category-icon-container"
+                  style={{ color: category.color }}
+                >
+                  {icons[category.icon]}
+                </span>
+
+                <p className="login-category-name">
+                  {category.name.trim() === "PestControl"
+                    ? "Pest Control"
+                    : category.name}
+                </p>
+              </div>
             </div>
-            </div> 
           ))}
         </div>
-        </div>
-      </>
-    )
+      </div>
+    </>
+  );
 }
 
-export default CategoryListVirtual
+export default CategoryListVirtual;
