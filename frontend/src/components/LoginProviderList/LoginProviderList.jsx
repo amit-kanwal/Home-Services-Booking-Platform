@@ -1,4 +1,5 @@
 import "../ServiceProviderList/ServiceProvider.css";
+import "./LoginProvider.css"
 import { Link } from "react-router-dom";
 
 const LoginProviderList = ({
@@ -80,7 +81,7 @@ const LoginProviderList = ({
             marginTop: "20px",
           }}
         >
-          <button
+          <button className="page-change-btn"
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
           >
@@ -91,7 +92,7 @@ const LoginProviderList = ({
             Page {currentPage} of {totalPages}
           </span>
 
-          <button
+          <button className="page-change-btn"
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >

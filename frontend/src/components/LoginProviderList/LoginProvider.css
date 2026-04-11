@@ -1,0 +1,8 @@
+.page-change-btn{
+    border: none;
+    color: white;
+    border-radius: 5px;
+    background-color: #1e3a8a;
+    padding: 5px;
+    cursor: pointer;
+}
