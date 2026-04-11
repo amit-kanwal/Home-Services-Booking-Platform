@@ -1,10 +1,9 @@
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import logo from "/logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState , useEffect} from "react";
-
+import { useState, useEffect } from "react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +21,7 @@ function Navbar() {
     }
   }, [isDisplay]);
 
-  const category= "Popular"
-
+  const category = "Popular";
   return (
     <>
       <nav>
@@ -38,37 +36,33 @@ function Navbar() {
             </li>
             {!hideServiceIcon && (
               <li className="nav-link">
-              <Link to={`/Services/${category}`}>Services</Link>
-            </li>
+                <Link to={`/Services/${category}`}>Services</Link>
+              </li>
             )}
             <li className="nav-link">
               <Link to="/About">About</Link>
             </li>
           </ul>
         </div>
-        <div className="nav-btn">
-          <Link to="/Login">
-            <button className="btn" id="logIn">
-              Log In
-            </button>
-          </Link>
-          <Link to="/Signup">
-            <button
-              className="btn"
-              id="signUp"
-            >
-              Get Started
-            </button>
-          </Link>
-          
-        </div>
+          <div className="nav-btn">
+            <Link to="/Login">
+              <button className="btn" id="logIn">
+                Log In
+              </button>
+            </Link>
+            <Link to="/Signup">
+              <button className="btn" id="signUp">
+                Get Started
+              </button>
+            </Link>
+          </div>
         <div className="nav-menu-icon">
           <button onClick={() => setIsOpen(true)}>
             <MenuIcon style={{ color: "rgb(125, 125, 125)", padding: "1px" }} />
           </button>
         </div>
       </nav>
-      
+
       {isOpen && (
         <div className="dropdown">
           <nav>
@@ -87,10 +81,7 @@ function Navbar() {
             <Link to="/" className="drop-link" onClick={() => setIsOpen(false)}>
               Home
             </Link>
-            <Link
-              className="drop-link"
-              to={`/Services/${category}`}
-            >
+            <Link className="drop-link" to={`/Services/${category}`}>
               Services
             </Link>
             <Link

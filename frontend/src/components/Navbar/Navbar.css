@@ -185,6 +185,7 @@ nav{
     display: flex;
     align-items: center;
 }
+
 @keyframes slideIn {
     from {
         opacity: 0;

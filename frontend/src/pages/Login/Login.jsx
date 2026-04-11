@@ -1,6 +1,6 @@
 import './Login.css'
 import {Link , useNavigate} from 'react-router-dom'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import axios from "axios";
 
 function Login() {
@@ -33,10 +33,32 @@ function Login() {
             if(data.role === 'customer'){
                 navigate('/Customer_dashboard')
             }
+
+            if(data.role == 'service_provider'){
+                navigate('/Provider_dashboard')
+            }
         } catch(err){
-            console.log(err);
+            alert(err.response?.data?.message || "Login failed");
         }
     }
+
+    const [token, setToken] = useState(null)
+    const [user, setUser] = useState(null)
+       
+
+    useEffect(()=>{
+        setToken(localStorage.getItem("token"))
+        setUser(JSON.parse(localStorage.getItem('user')))
+        if(token){
+            if(user?.role === 'customer'){
+                navigate('/Customer_dashboard')
+            }
+
+            if(user?.role === 'service_provider'){
+                navigate('/Provider_dashboard')
+            }
+        }
+    }, [])
 
   return (
     <div className="login-container">

@@ -85,15 +85,11 @@ export const customerSignup = async (req, res) => {
       { expiresIn: "1d" },
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-    });
-
-    res.status(201).json({
-      message: "Customer Sign up sucessfull",
-    });
+    res.status(200).json({
+    id : user_id,
+    role : role,
+    token: token
+  })
   } catch (err) {
     console.error(err);
     res.status(500).json({

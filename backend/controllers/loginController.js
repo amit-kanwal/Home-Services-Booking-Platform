@@ -28,31 +28,6 @@ async function userLogin(req, res) {
 
   const user = result.rows[0];
 
-  let userResult;
-
-  if(user.role == 'customer'){
-    userResult = await pool.query(
-        `SELECT
-                u.id,
-                u.role,
-                u.username,
-                u.email,
-                p.user_id,
-                p.name,
-                p.address,
-                p.latitude,
-                p.longitude
-            FROM users u
-            JOIN customer_info p
-            ON u.id = p.user_id
-            WHERE u.id = $1
-            ;`,
-        [user.id],
-      )
-  }
-
-  delete userResult.password;
-
   const token = jwt.sign(
     {
       id: user.id,

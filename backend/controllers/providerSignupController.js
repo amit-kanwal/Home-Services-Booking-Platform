@@ -1,5 +1,6 @@
 import pool from "../config/db.js";
 import bycrpt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const providerSignup = async (req, res) => {
   try {
@@ -93,9 +94,19 @@ export const providerSignup = async (req, res) => {
         business_name,
       ],
     );
+    const token = jwt.sign(
+      {
+        id: user_id,
+        role: role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" },
+    );
 
-    res.status(201).json({
-      message: "Provider signup successful",
+    res.status(200).json({
+      id: user_id,
+      role: role,
+      token: token,
     });
   } catch (err) {
     console.error(err);

@@ -2,6 +2,7 @@ import GetLocation from "../../../Utils/GetLocation.js";
 import { useState, useEffect , useRef} from "react";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 function CustomerSignup() {
   const [location, setLocation] = useState(null);
@@ -21,6 +22,7 @@ function CustomerSignup() {
     phone: "",
     address: "",
   });
+  const navigate = useNavigate()
 
   const [errors, setErrors] = useState({});
   const usernameErr = useRef(null);
@@ -116,22 +118,18 @@ function CustomerSignup() {
 
     try {
       const response = await axios.post("/api/CustomerSignup", data);
-      setFormData({
-        fullname: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-        email: "",
-        phone: "",
-        address: "",
-      });
-      data.append("location", null);
-      setAlertDisplay("flex");
-      setSignupMessage("Signup successful, Log in now");
-      setAlertColor("rgb(86, 189, 230)");
-      setLocationBtnBorder("2px solid rgb(86, 189, 230)");
-      setLocationText("Get Location");
-    } catch (err) {
+      const resData = response.data;
+            localStorage.setItem("token" , resData.token)
+            const user = {
+                id : resData.id,
+                role : resData.role
+            }
+            localStorage.setItem("user", JSON.stringify(user));
+            if(resData.role === 'customer'){
+                navigate('/Customer_dashboard')
+            }
+            
+        } catch (err) {
   let field;
 
   if (err.response && err.response.data) {
@@ -151,6 +149,10 @@ function CustomerSignup() {
   else if (field === "phone") {
     newErrors.phone = "Please provide different mobile number";
     scrollToElement(phoneErr);
+  }
+  else{
+    alert(err.response?.data?.message || "Signup failed");
+    console.log(err)
   }
 
   setErrors(newErrors);

@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect , useState} from "react";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Services from "./pages/Services/Services";
@@ -9,14 +10,33 @@ import ProviderSignup from "./pages/Signup/ProviderSignup/ProviderSignup";
 import CustomerSignup from "./pages/Signup/CustomerSignup/CustomerSignup";
 import SearchResult from "./pages/SearchResult/SearchResult";
 import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
-import CustomerDashboard from "../src/pages/CustomerDashboard/CustomerDashboard"
+import CustomerDashboard from "../src/pages/CustomerDashboard/CustomerDashboard";
 import RoleBasedRoute from "./components/ProtectedRoutes/RoleBasedRoute";
+import ProviderDashboard from "./pages/ProviderDashboard/ProviderDashboard";
+import CustomerBooking from "./pages/Bookings/CustomerBookings/CustomerBooking";
 
 function App() {
+
+  const [token , setToken] = useState(localStorage.getItem('token'))
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            token ? (
+              user?.role === "customer" ? (
+                <Navigate to ="/Customer_dashboard"/>
+              ) : (
+                <Navigate to ="/Provider_dashboard"/>
+              )
+            ) : (
+              <Home />
+            )
+          }
+        />
         <Route path="/Services/:category" element={<Services />} />
         <Route path="/SerchResult/:category" element={<SearchResult />} />
         <Route path="/About" element={<About />} />
@@ -29,9 +49,25 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["customer"]}>
-                <CustomerDashboard/>
+                <CustomerDashboard setToken={setToken} setUser={setUser}/>
               </RoleBasedRoute>
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Provider_dashboard"
+          element={
+            <ProtectedRoute>
+              <RoleBasedRoute allowedRoles={["service_provider"]}>
+                <ProviderDashboard />
+              </RoleBasedRoute>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/CustomerBookings"
+          element={
+            <CustomerBooking/>
           }
         />
       </Routes>

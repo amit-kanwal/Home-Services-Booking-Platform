@@ -5,98 +5,98 @@ import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import FormatPaintIcon from "@mui/icons-material/FormatPaint";
 import GrassIcon from '@mui/icons-material/Grass';
-import LocalCarWashIcon from '@mui/icons-material/LocalCarWash';
 import PestControlIcon from '@mui/icons-material/PestControl';
-import "./CategoryList.css";
 import{useNavigate} from "react-router-dom"
+import "./categoryListVirtual.css"
 
 const icons = {
   cleaning: (
     <CleaningServicesIcon
       id="cleaning"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   construction: (
     <HandymanIcon
       id="repair"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   plumbing: (
     <PlumbingIcon
       id="plumbing"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   local_shipping: (
     <LocalShippingIcon
       id="shipping"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   format_paint: (
     <FormatPaintIcon
       id="paint"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   electrical_services: (
     <ElectricBoltIcon
       id="electric"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   gardening: (
     <GrassIcon
       id="gardening"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
   pest_control: (
     <PestControlIcon
       id="pestControl"
       className="service-icon"
-      sx={{ height: 40, width: 40 }}
+      sx={{ height: 20, width: 20 }}
     />
   ),
 };
 
-function CategoryList({ categoryList}) {
+
+function CategoryListVirtual({categoryList}) {
   const navigate = useNavigate();
-
-  const handleCategoryListOnClick = (category)=>{
-    navigate(`/Services/${category.name}`)
-  }
-
-  return (
-    <>
-      <div className="all-cat">
-        <h2 >All Categories</h2>     
-      <div className="icon">
-        {categoryList.map((category, index) => (
-          <div key={index} onClick={()=>handleCategoryListOnClick(category)}>
-            <span
-            className="material-symbols-outlined icon-container"
-          >
-            <span style={{ color: category.color }}>
-              {icons[category.icon]}
-            </span>
-            <h2>{category.name}</h2>
-          </span>
-          </div> 
-        ))}
-      </div>
-      </div>
-    </>
-  );
+  
+    const handleCategoryListOnClick = (category)=>{
+      navigate(`/Services/${category.name}`)
+    }
+  
+    return (
+      <>
+        <div className="all-cat-login">
+          <h2 className="all-cat-heading">Categories</h2>     
+        <div className="login-category-icon">
+          {categoryList.map((category, index) => (
+            <div key={index}> 
+              <div
+              className="material-symbols-outlined login-icon-container"
+            >
+              <span className="login-category-icon-container" style={{ color: category.color }}>
+                {icons[category.icon]}
+              </span>
+              <p className="login-category-name">{category.name}</p>
+            </div>
+            </div> 
+          ))}
+        </div>
+        </div>
+      </>
+    )
 }
 
-export default CategoryList;
+export default CategoryListVirtual

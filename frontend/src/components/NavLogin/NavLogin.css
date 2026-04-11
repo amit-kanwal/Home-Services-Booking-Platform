@@ -1,0 +1,21 @@
+.nav-login{
+    margin-right: 10px;
+    width: 15%;
+}
+
+.nav-login-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.nav-login-container li{
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.acc-circle{
+    color: green;
+}
+

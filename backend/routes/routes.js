@@ -8,6 +8,7 @@ import { customerSignup } from '../controllers/customerSignupController.js'
 import userLogin from '../controllers/loginController.js'
 import { authMiddleware, authorize } from '../middleware/authentication.js'
 import { customerDashboard } from '../controllers/customerDashboardController.js'
+import { getUserInfo } from '../controllers/userInformationController.js'
 
 const router = express.Router()
 
@@ -19,6 +20,7 @@ router.post('/CustomerSignup', upload.none(), customerSignup)
 router.get('/serviceProviderinfo', getInformation)
 router.get('/login', userLogin)
 router.get('/customerDashboard', authMiddleware, authorize("customer"), customerDashboard);
+router.get('/userInfo', authMiddleware, getUserInfo)
 // router.post('/serviceProviderinfo', setInformation)
 
 

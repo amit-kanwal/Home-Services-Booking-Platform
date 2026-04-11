@@ -5,6 +5,7 @@ import { compressImage } from "../../../Utils/CompressImage.js";
 import { useState, useEffect , useRef} from "react";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
+import {useNavigate} from "react-router-dom"
 
 function ProviderSignup() {
   const [location, setLocation] = useState(null);
@@ -18,6 +19,8 @@ function ProviderSignup() {
   const [isAlertDisplay, setAlertDisplay] = useState("none");
   const [signupMessage, setSignupMessage] = useState("none");
   const [alertColor, setAlertColor] = useState("");
+  const [token, setToken] = useState(null)
+  const [user, setUser] = useState(null)
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
@@ -32,6 +35,8 @@ function ProviderSignup() {
     price: "",
     business_name: "",
   });
+
+  const navigate = useNavigate()
 
   const [errors, setErrors] = useState({});
   const usernameErr = useRef(null);
@@ -161,29 +166,16 @@ function ProviderSignup() {
 
     try {
       const response = await axios.post("/api/providerSignup", data);
-      setFormData({
-        fullname: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-        email: "",
-        phone: "",
-        category: "",
-        experience: "",
-        address: "",
-        description: "",
-        price: "",
-        business_name: "",
-      });
-      data.append("location", null);
-      data.append("image", null);
-      setCompressedImage(null);
-      setImgBorder("2px solid rgb(86, 189, 230)");
-      setAlertDisplay("flex");
-      setSignupMessage("Signup successful, Log in now");
-      setAlertColor("rgb(86, 189, 230)");
-      setLocationBtnBorder("2px solid rgb(86, 189, 230)");
-      setLocationText("Get Location");
+      const resData = response.data;
+            localStorage.setItem("token" , resData.token)
+            const user = {
+                id : resData.id,
+                role : resData.role
+            }
+            localStorage.setItem("user", JSON.stringify(user));
+            if(resData.role == 'service_provider'){
+                navigate('/Provider_dashboard')
+            }
     } catch (err) {
   let field;
 
@@ -205,6 +197,8 @@ function ProviderSignup() {
     newErrors.phone = "Please provide different mobile number";
     scrollToElement(phoneErr);
   }
+
+  console.log(err.response?.data);
 
   setErrors(newErrors);
 }
