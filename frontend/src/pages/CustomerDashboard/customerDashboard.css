@@ -1,6 +1,5 @@
 .left{
     width: 25%;
-    height: 100%;
     border-right: 1px solid rgb(191, 191, 191);
     display: flex;
     flex-direction: column;
@@ -21,4 +20,13 @@
 
 .customer-dashboard-layout{
     display: flex;
+}
+
+.right{
+    width: 100%;
+}
+
+#category-heading-login{
+    margin: 20px;
+    font-weight: 400;
 }

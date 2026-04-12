@@ -2,6 +2,7 @@ import './Login.css'
 import {Link , useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import axios from "axios";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function Login() {
     const [loginData, setLoginData] = useState({
@@ -44,7 +45,6 @@ function Login() {
 
     const [token, setToken] = useState(null)
     const [user, setUser] = useState(null)
-       
 
     useEffect(()=>{
         setToken(localStorage.getItem("token"))
@@ -61,11 +61,14 @@ function Login() {
     }, [])
 
   return (
-    <div className="login-container">
-        <div className="login-form">
+    <div className="login-container" >
+        
+        <div className="login-form" style={{position: "relative"}}>
+            <ArrowBackIcon className="back-btn-home" sx={{fontSize : "2rem"}} onClick={()=> navigate("/")}/>
             <form onSubmit={handleLoginFormSubmit}>
                 <h2>Login</h2>
-                <div className="form-container">
+                <div className="form-container" >
+                    
                     <div>User Name</div>
                     <input type="text" name="username" id="username" value={loginData.username} onChange={handleLoginFormChange}/>
                     <div>Password</div>

@@ -1,6 +1,5 @@
 .nav-login{
     margin-right: 10px;
-    width: 15%;
 }
 
 .nav-login-container{
@@ -17,5 +16,104 @@
 
 .acc-circle{
     color: green;
+}
+
+.nav-menu-icon-login{
+    display: none;
+    height: inherit;
+}
+
+.nav-login-item{
+    margin: 0 20px
+}
+
+.nav-menu-icon-login button {
+    background-color: transparent;
+    border: 1.5px solid #ccc;
+    padding: 4px 6px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-login {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    z-index: 2000;
+}
+
+.dropdown-items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+    width: 100vw;
+}
+
+.dropdown-items a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    transition: 0.3s;
+    margin-left: 20px;
+}
+
+.dropdown a:hover {
+    transform: scale(1.05);
+    color: #0072ff;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-menu-icon-close{
+    margin-right: 10px;
+    height: inherit;
+    display: flex;
+    align-items: center
+}
+
+.nav-login-item-dropdown{
+    list-style-type: none;
+    border-radius: 5px;
+    background-color: rgb(89, 89, 239);
+    color: white;
+    padding: 10px;
+}
+
+@media only screen and (max-width: 500px){
+    .nav-login-container{
+        display: none;
+    }
+
+    .nav-menu-icon-login{
+        display: flex;
+        align-items: center;
+    }
+
 }
 

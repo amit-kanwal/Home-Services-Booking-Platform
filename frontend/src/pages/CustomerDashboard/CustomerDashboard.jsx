@@ -39,16 +39,20 @@ function CustomerDashboard({ setToken, setUser }) {
   }, []);
 
   useEffect(() => {
+  if (customer.latitude && customer.longitude) {
     getProviderInfo(category);
-  }, [category]);
+  }
+}, [category, customer.latitude, customer.longitude]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [category]);
 
   const getProviderInfo = (category) => {
-    axios
-      .get(`/api/serviceProviderinfo?category=${category}`)
+    api
+      .get(
+        `/serviceProviderinfoLogin?category=${category}&lat=${customer.latitude}&lng=${customer.longitude}`,
+      )
       .then((res) => setProviderInfo(res.data))
       .catch((err) => console.log("error"));
   };
@@ -80,7 +84,7 @@ function CustomerDashboard({ setToken, setUser }) {
           </div>
         </section>
         <section className="right">
-          <h2>{category}</h2>
+          <h2 id="category-heading-login">{category}</h2>
           <LoginProviderList
             providerInfo={providerInfo}
             text="No providers available"

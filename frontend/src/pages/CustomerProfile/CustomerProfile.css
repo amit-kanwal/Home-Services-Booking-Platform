@@ -1,0 +1,101 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f4f6;
+  font-family: Arial, sans-serif;
+}
+
+.card {
+  width: 400px;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: #2563eb;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.name {
+  margin: 10px 0 5px;
+}
+
+.username {
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.info {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 80%;
+    padding: 20px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+
+  .row {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 95%;
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .avatar {
+    width: 65px;
+    height: 65px;
+    font-size: 24px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .username {
+    font-size: 14px;
+  }
+
+  .row {
+    font-size: 13px;
+  }
+}
+
+.back-btn{
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+}

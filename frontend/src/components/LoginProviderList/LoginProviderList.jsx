@@ -65,6 +65,7 @@ const LoginProviderList = ({
             justifyContent: "center",
             alignItems: "center",
             fontSize: "2rem",
+            marginLeft : "20px"
           }}
         >
           {text}

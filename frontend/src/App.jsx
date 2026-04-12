@@ -14,6 +14,7 @@ import CustomerDashboard from "../src/pages/CustomerDashboard/CustomerDashboard"
 import RoleBasedRoute from "./components/ProtectedRoutes/RoleBasedRoute";
 import ProviderDashboard from "./pages/ProviderDashboard/ProviderDashboard";
 import CustomerBooking from "./pages/Bookings/CustomerBookings/CustomerBooking";
+import CustomerProfile from "./pages/CustomerProfile/CustomerProfile";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/ProviderSignup" element={<ProviderSignup />} />
         <Route path="/CustomerSignup" element={<CustomerSignup />} />
+        <Route path="/CustomerProfile" element={<CustomerProfile />} />
         <Route
           path="/Customer_dashboard"
           element={

@@ -20,6 +20,7 @@ function Navbar() {
       return () => clearTimeout(timeoutId);
     }
   }, [isDisplay]);
+ 
 
   const category = "Popular";
   return (
