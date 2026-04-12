@@ -45,7 +45,16 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/ProviderSignup" element={<ProviderSignup />} />
         <Route path="/CustomerSignup" element={<CustomerSignup />} />
-        <Route path="/CustomerProfile" element={<CustomerProfile />} />
+        <Route
+          path="/CustomerProfile"
+          element={
+            <ProtectedRoute>
+              <RoleBasedRoute allowedRoles={["customer"]}>
+                <CustomerProfile />
+              </RoleBasedRoute>
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/Customer_dashboard"
           element={
@@ -69,7 +78,11 @@ function App() {
         <Route
           path="/CustomerBookings"
           element={
-            <CustomerBooking/>
+            <ProtectedRoute>
+              <RoleBasedRoute allowedRoles={["customer"]}>
+                <CustomerBooking/>
+              </RoleBasedRoute>
+            </ProtectedRoute>
           }
         />
       </Routes>

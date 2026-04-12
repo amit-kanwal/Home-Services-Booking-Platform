@@ -1,0 +1,38 @@
+.all-cat-heading{
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
+
+.login-category-icon-horizontal{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-icon-container{
+    display: flex;
+    width: 200px;
+    height: 40px;
+    border: 1px solid rgb(209, 209, 209);
+    gap: 2px;
+    border-radius: 10px;
+    align-items: center;
+    padding: 5px;
+    background-color: white;
+    padding: 10px 5px;
+}
+
+.login-icon-container:hover{
+    border: 2px solid blue;
+    cursor: pointer;
+}
+
+.active-category {
+  border: 2px solid var(--primary-color);
+  background-color: rgba(0, 123, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}

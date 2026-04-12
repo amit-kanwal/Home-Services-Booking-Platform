@@ -18,6 +18,11 @@
     margin: 20px 20px 10px
 }
 
+.login-top-info-two{
+    font-weight: 300;
+    margin: 20px 20px 10px
+}
+
 .customer-dashboard-layout{
     display: flex;
 }
@@ -29,4 +34,25 @@
 #category-heading-login{
     margin: 20px;
     font-weight: 400;
+}
+
+.top-info-two{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.customer-dashboard-layout-two{
+    width: 100%;
+    display: none;
+}
+
+@media only screen and (max-width : 900px){
+    .customer-dashboard-layout{
+        display: none;
+    }
+
+    .customer-dashboard-layout-two{
+        display: flex;
+    }
 }

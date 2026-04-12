@@ -4,8 +4,9 @@ import NavLogin from "../../components/NavLogin/NavLogin.jsx";
 import Logout from "../../components/Logout/logout.jsx";
 import "./customerDashboard.css";
 import axios from "axios";
-import CategoryListVirtual from "../../components/CategoryListVirtual/CategoryListVirtual.jsx";
+import CategoryListVertical from "../../components/CategoryListVertical/CategoryListVertical.jsx";
 import LoginProviderList from "../../components/LoginProviderList/LoginProviderList.jsx";
+import CategoryListHorizontal from '../../components/CategoryListHorizontal/CategoryListHorizontal.jsx'
 
 function CustomerDashboard({ setToken, setUser }) {
   const [customer, setCustomerInfo] = useState({});
@@ -73,7 +74,7 @@ function CustomerDashboard({ setToken, setUser }) {
             Welcome <strong>{customer.name}</strong>
           </p>
           <div className="category-container-customerDashboard">
-            <CategoryListVirtual
+            <CategoryListVertical
               categoryList={categories}
               setCategory={setCategory}
               currentCategory={category}
@@ -84,6 +85,32 @@ function CustomerDashboard({ setToken, setUser }) {
           </div>
         </section>
         <section className="right">
+          <h2 id="category-heading-login">{category}</h2>
+          <LoginProviderList
+            providerInfo={providerInfo}
+            text="No providers available"
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </section>
+      </div>
+      <div className="customer-dashboard-layout-two">
+        <section className="whole">
+          <div className="top-info-two">
+            <p className="login-top-info-two">
+            Welcome <strong>{customer.name}</strong>
+          </p>
+          <span style={{display: "flex", height : "inherit", alignItems: "center", marginRight : "10px"}}>
+            <Logout setUser={setUser} setToken={setToken} />
+          </span>
+          </div>
+          <div className="category-container-customerDashboard">
+            <CategoryListHorizontal
+              categoryList={categories}
+              setCategory={setCategory}
+              currentCategory={category}
+            />
+          </div>
           <h2 id="category-heading-login">{category}</h2>
           <LoginProviderList
             providerInfo={providerInfo}

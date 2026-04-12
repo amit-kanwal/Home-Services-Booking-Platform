@@ -7,7 +7,7 @@ import FormatPaintIcon from "@mui/icons-material/FormatPaint";
 import GrassIcon from "@mui/icons-material/Grass";
 import PestControlIcon from "@mui/icons-material/PestControl";
 import { useNavigate } from "react-router-dom";
-import "./categoryListVirtual.css";
+import "./categoryListVertical.css";
 
 const icons = {
   cleaning: (
@@ -68,7 +68,7 @@ const icons = {
   ),
 };
 
-function CategoryListVirtual({ categoryList, setCategory, currentCategory }) {
+function CategoryListVertical({ categoryList, setCategory, currentCategory }) {
   const navigate = useNavigate();
 
   const handleCategoryClick = (name) => {
@@ -109,4 +109,4 @@ function CategoryListVirtual({ categoryList, setCategory, currentCategory }) {
   );
 }
 
-export default CategoryListVirtual;
+export default CategoryListVertical;
