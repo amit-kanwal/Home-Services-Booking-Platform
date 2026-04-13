@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 import api from "../../Utils/axiosApi.js";
 import { useState, useEffect } from "react";
+import { User, Mail, Phone, MapPin } from "lucide-react";
 
 export default function CustomerProfileView() {
   const [customer, setCustomerInfo] = useState({});
@@ -34,9 +35,9 @@ export default function CustomerProfileView() {
   return (
     <>
     <NavLogin />
-    <div className="container">
+    <div className="customer-container">
       
-      <div className="card">
+      <div className="customer-card">
         
           <ArrowBackIcon className="back-btn" sx={{fontSize : "2rem"}} onClick={()=> navigate("/Customer_dashboard")}/>
         
@@ -47,12 +48,27 @@ export default function CustomerProfileView() {
         <h2 className="name">{customer.name}</h2>
         <p className="username">@{customer.username}</p>
 
-        <div className="info">
-          <div className="row">👤 <span>{customer.name}</span></div>
-          <div className="row">📧 <span>{customer.email}</span></div>
-          <div className="row">📞 <span>{customer.phone}</span></div>
-          <div className="row">📍 <span>{customer.address}</span></div>
-        </div>
+        <div className="customer-info">
+  <div className="row">
+    <User size={18} className="customer-name"/>
+    <span>{customer.name}</span>
+  </div>
+
+  <div className="row">
+    <Mail size={18} className="customer-email"/>
+    <span>{customer.email}</span>
+  </div>
+
+  <div className="row">
+    <Phone size={18} className="customer-phone"/>
+    <span>{customer.phone}</span>
+  </div>
+
+  <div className="row">
+    <MapPin size={18} className="customer-map-pin"/>
+    <span>{customer.address}</span>
+  </div>
+</div>
       </div>
     </div>
     </>    

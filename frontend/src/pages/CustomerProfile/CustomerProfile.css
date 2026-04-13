@@ -1,4 +1,4 @@
-.container {
+.customer-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   font-family: Arial, sans-serif;
 }
 
-.card {
+.customer-card {
   width: 400px;
   background: white;
   padding: 25px;
@@ -40,7 +40,7 @@
   margin-bottom: 20px;
 }
 
-.info {
+.customer-info {
   text-align: left;
   margin-top: 15px;
 }
@@ -51,6 +51,22 @@
   gap: 10px;
   margin: 10px 0;
   font-size: 15px;
+}
+
+.customer-name{
+  color : purple;
+}
+
+.customer-email{
+  color: skyblue;
+}
+
+.customer-phone{
+  color: green;
+}
+
+.customer-map-pin{
+  color: red;
 }
 
 @media (max-width: 768px) {
