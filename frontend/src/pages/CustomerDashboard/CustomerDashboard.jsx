@@ -7,6 +7,7 @@ import axios from "axios";
 import CategoryListVertical from "../../components/CategoryListVertical/CategoryListVertical.jsx";
 import LoginProviderList from "../../components/LoginProviderList/LoginProviderList.jsx";
 import CategoryListHorizontal from '../../components/CategoryListHorizontal/CategoryListHorizontal.jsx'
+import { useNavigate } from "react-router-dom";
 
 function CustomerDashboard({ setToken, setUser }) {
   const [customer, setCustomerInfo] = useState({});
@@ -14,12 +15,16 @@ function CustomerDashboard({ setToken, setUser }) {
   const [providerInfo, setProviderInfo] = useState([]);
   const [category, setCategory] = useState("Cleaning");
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     api
       .get("/userInfo")
       .then((result) => {
-        console.log(result.data);
+        if(result.status === 401){
+          navigate("/Login")
+        }
         const userInfo = {
           name: result.data[0].name,
           phone: result.data[0].contact,

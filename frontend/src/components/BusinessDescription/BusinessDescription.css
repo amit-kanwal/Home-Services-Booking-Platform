@@ -1,0 +1,36 @@
+.desc-body{
+  display: flex;
+}
+
+.desc-container{
+  width: 60%;
+  text-align: justify;
+  margin: 10px 20px 20px;
+}
+
+.description-heading{
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.desc-img-container{
+  margin: 10px 20px 20px;
+}
+
+.desc-img{
+  height: 300px;
+}
+
+@media only screen and (max-width: 500px){
+  .desc-body{
+    flex-direction: column;
+  }
+
+  .desc-container{
+  width: 90%;
+  box-sizing: border-box;
+}
+
+}
+

@@ -1,0 +1,108 @@
+.provider-info-container{
+    display: flex;
+    gap: 4;
+    align-items: center;
+}
+
+.provider-info-image{
+  width: 200px;
+  height: 200px;
+  display: flex;
+  border-radius: 50%;
+  margin: 30px;
+}
+
+.provider-category-heading {
+    padding: 5px 20px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #dedede 0%, #dadbdb 100%);
+    width: max-content;
+    margin: 10px 0;
+    color: rgb(9, 1, 63);
+    font-size: 1rem;
+}
+
+.provider-info-list{
+    margin-left: 10px;
+}
+
+.provider-name{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.business-owner-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 60px 10px 60px;
+    gap: 20px;
+}
+
+.business-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.provider-detail-icon{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.book-service{
+    background-color: var(--primary-color);
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: end;
+}
+
+.book-service-btn{
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+}
+
+.book-service:hover{
+    background-color: green;
+}
+
+@media only screen and (max-width: 750px){
+    .provider-info-container{
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .business-info{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .provider-detail-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.book-service{
+    align-self: center;
+}
+
+.provider-top-infomation{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+}

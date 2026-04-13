@@ -47,7 +47,7 @@ const LoginProviderList = ({
 
                 <div className="address">{provider.address}</div>
 
-                <Link to="/Login" className="book-btn">
+                <Link to={`/ProviderDetail/${provider.id}`} className="book-btn">
                   Book Now
                 </Link>
               </div>

@@ -8,14 +8,15 @@ import { User, Mail, Phone, MapPin } from "lucide-react";
 
 export default function CustomerProfileView() {
   const [customer, setCustomerInfo] = useState({});
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     api
       .get("/userInfo")
       .then((result) => {
-        console.log(result.data);
+        if(result.status === 401){
+          navigate("/Login")
+        }
         const userInfo = {
           name: result.data[0].name,
           username : result.data[0].username,

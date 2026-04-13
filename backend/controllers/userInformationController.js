@@ -7,6 +7,7 @@ export async function getUserInfo(req , res){
         `SELECT
                 u.id,
                 u.role,
+                u.username,
                 c.user_id,
                 c.name,
                 c.address,
