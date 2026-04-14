@@ -36,7 +36,8 @@ export const getInformation = async (req, res) => {
                 p.category,
                 p.address,
                 p.rating,
-                p.price
+                p.price,
+                p.business_name
             FROM users u
             JOIN service_provider_info p
             ON u.id = p.user_id

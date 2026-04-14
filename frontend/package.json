@@ -12,15 +12,20 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@fontsource-variable/geist": "^5.2.8",
     "@mui/icons-material": "^7.3.7",
-    "@mui/material": "^7.3.7",
+    "@mui/material": "^7.3.10",
     "axios": "^1.13.4",
     "browser-image-compression": "^2.0.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lucide-react": "^1.8.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0",
     "react-simple-typewriter": "^5.0.1",
+    "shadcn": "^4.2.0",
+    "tailwind-merge": "^3.5.0",
     "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {

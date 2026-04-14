@@ -31,14 +31,17 @@ function Home() {
   const getCategoriesList = () => {
     axios
       .get("/api/categories")
-      .then((res) => setCategories(res.data))
+      .then((res) => {setCategories(res.data)})
       .catch((err) => console.log("error"));
   };
 
   const getProviderInfo = (category) => {
     axios
       .get(`/api/serviceProviderinfo?category=${category}`)
-      .then((res) => setProviderInfo(res.data))
+      .then((res) => {
+        setProviderInfo(res.data)
+        console.log(res.data)
+      })
       .catch((err) => console.log("error"));
   };
 

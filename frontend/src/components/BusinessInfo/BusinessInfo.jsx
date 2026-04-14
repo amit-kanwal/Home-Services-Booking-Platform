@@ -1,6 +1,7 @@
 import "./BusinessInfo.css";
 import { MapPin, Mail, User, Clock, CalendarPlus } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import MySheet from "../Mysheet/Mysheet";
 
 function BusinessInfo({ provider }) {
   const navigate = useNavigate();
@@ -50,12 +51,15 @@ function BusinessInfo({ provider }) {
             <Clock size={18} style={{ color: "gray" }} />
             <span>Available : 8:00 AM to 5:00 PM</span>
           </div>
-          <div className="book-service" onClick={bookAppointmentOnclick}>
-            <div className="book-service-btn">
-              <CalendarPlus size={20} style={{ color: "white" }} />
-              <span>Book Service</span>
+
+          <MySheet>
+            <div className="book-service" >
+              <div className="book-service-btn">
+                <CalendarPlus size={20} style={{ color: "white" }} />
+                <span>Book Service</span>
+              </div>
             </div>
-          </div>
+          </MySheet>
         </div>
       </div>
     </>
