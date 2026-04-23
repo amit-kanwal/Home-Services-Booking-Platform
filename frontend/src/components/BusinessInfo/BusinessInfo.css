@@ -52,28 +52,27 @@
 }
 
 .book-service{
-    background-color: var(--primary-color);
-    width: 200px;
-    height: 40px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: end;
+    justify-content: end;
 }
 
 .book-service-btn{
     text-decoration: none;
+    background-color: var(--primary-color);
+    width: 200px;
+    height: 40px;
     color: white;
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 0 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: end;
+    justify-content: center;
 }
 
-.book-service:hover{
+.book-service-btn:hover{
     background-color: green;
 }
 
@@ -98,6 +97,7 @@
 
 .book-service{
     align-self: center;
+    justify-content: center;
 }
 
 .provider-top-infomation{

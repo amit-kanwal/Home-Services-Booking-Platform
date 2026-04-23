@@ -1,16 +1,10 @@
 import "./BusinessInfo.css";
 import { MapPin, Mail, User, Clock, CalendarPlus } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import MySheet from "../Mysheet/Mysheet";
+import MySheet from "../Mysheet/MySheet.jsx";
 
 function BusinessInfo({ provider }) {
-  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user.id;
-  const bookAppointmentOnclick = () => {
-    navigate(`/BookSercice/${userId}/${provider.id}`);
-  };
-
   return (
     <>
       <div className="business-info">
@@ -49,16 +43,16 @@ function BusinessInfo({ provider }) {
           </div>
           <div className="provider-detail-icon">
             <Clock size={18} style={{ color: "gray" }} />
-            <span>Available : 8:00 AM to 5:00 PM</span>
+            <span>Available : 9:00 AM to 4:00 PM</span>
           </div>
 
-          <MySheet>
-            <div className="book-service" >
-              <div className="book-service-btn">
+          <MySheet customerId={userId} providerId={provider.id}>
+              <div className="book-service">
+                <div className="book-service-btn">
                 <CalendarPlus size={20} style={{ color: "white" }} />
                 <span>Book Service</span>
               </div>
-            </div>
+              </div>    
           </MySheet>
         </div>
       </div>

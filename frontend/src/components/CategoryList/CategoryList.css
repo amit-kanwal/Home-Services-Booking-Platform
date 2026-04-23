@@ -12,7 +12,7 @@
 
 .icon {
 display: flex;
-  gap: 30px;
+  gap: 28px;
   flex-wrap: wrap;
   margin: 10px auto;
 }

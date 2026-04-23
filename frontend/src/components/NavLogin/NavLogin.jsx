@@ -11,13 +11,15 @@ function NavLogin() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isDisplay, setDisplay] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"))
+  const userId = user.id;
 
   const handleAccIconOnclick = () => {
     navigate("/CustomerProfile");
   };
 
   const handleBookingclick = () => {
-    navigate("/CustomerBookings");
+    navigate(`/CustomerBookings/${userId}`);
   };
 
   const handleDashboardOnclick = ()=>{

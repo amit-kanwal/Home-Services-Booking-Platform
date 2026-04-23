@@ -1,0 +1,104 @@
+.calender-container{
+    margin: 0;
+}
+
+.book-services-heading{
+    font-weight: 500;
+}
+
+.sheet-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-date-heading{
+    font-weight: 500;
+}
+
+.sheet-container{
+    width: 400px;
+}
+
+.time-slot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.time-slot button {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  border-radius: 20px;
+  background: #f9f9f9;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  width: 100px;
+}
+
+
+.time-slot button:hover {
+  background: var(--primary-color);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.time-slot button.active {
+  background: linear-gradient(135deg, var(--primary-color), blue);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transform: scale(1.05);
+}
+
+.time-slot button:disabled {
+  background: #eee;
+  color: #aaa;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.book {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.book-service-sheet {
+  width: 40%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--primary-color), blue);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.book-service-sheet:hover{
+    background: linear-gradient(135deg, green , limegreen);
+}
+
+.no-time-slot{
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+.time-slot button:disabled {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+  border: 1px solid #ddd;
+}

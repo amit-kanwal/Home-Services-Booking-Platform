@@ -11,6 +11,8 @@ import { customerDashboard } from '../controllers/customerDashboardController.js
 import { getUserInfo } from '../controllers/userInformationController.js'
 import { getProviderInfo } from '../controllers/providerControllers.js'
 import { getProviderDetail } from '../controllers/businessDetailController.js'
+import { bookProvider } from '../controllers/bookProviderController.js'
+import { getBookings, getBookingsCustomer } from '../controllers/bookingsController.js'
 
 const router = express.Router()
 
@@ -25,6 +27,9 @@ router.get('/customerDashboard', authMiddleware, authorize("customer"), customer
 router.get('/userInfo', authMiddleware, getUserInfo)
 router.get('/serviceProviderinfoLogin', authMiddleware, getProviderInfo)
 router.get('/ProviderDetail/:id', authMiddleware, getProviderDetail)
+router.post('/book', authMiddleware, bookProvider);
+router.get("/bookings/provider/:providerId/:date", authMiddleware, getBookings);
+router.get("/bookings/customer/:customerId", authMiddleware, getBookingsCustomer);
 // router.post('/serviceProviderinfo', setInformation)
 
 

@@ -40,7 +40,6 @@ function Home() {
       .get(`/api/serviceProviderinfo?category=${category}`)
       .then((res) => {
         setProviderInfo(res.data)
-        console.log(res.data)
       })
       .catch((err) => console.log("error"));
   };

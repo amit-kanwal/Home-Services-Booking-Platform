@@ -87,7 +87,7 @@ function App() {
           }
         />
         <Route
-          path="/CustomerBookings"
+          path="/CustomerBookings/:userId"
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["customer"]}>
