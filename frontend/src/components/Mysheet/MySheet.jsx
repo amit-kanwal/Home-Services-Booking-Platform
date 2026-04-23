@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -15,85 +15,81 @@ function MySheet({ children, customerId, providerId }) {
   const [date, setDate] = useState(dayjs());
   const [timeSlot, setTimeSlot] = useState([]);
   const [selectedTime, setSelectedTime] = useState(null);
-  const now = dayjs();
   const [showError, setShowError] = useState(false);
   const [bookedSlots, setBookedSlots] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const now = dayjs();
 
   useEffect(() => {
     getTime();
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowError(false);
-    }, 5000);
+    if (showError) {
+      const timer = setTimeout(() => setShowError(false), 5000);
+      return () => clearTimeout(timer);
+    }
   }, [showError]);
 
   useEffect(() => {
-    if (!providerId || !date) return;
+    if (!open || !providerId || !date) return;
+    setBookedSlots([]);
+    setSelectedTime(null);
 
-    api
-      .get(`/bookings/provider/${providerId}/${date.format("YYYY-MM-DD")}`)
-      .then((res) => {
+    const controller = new AbortController();
+
+    const fetchBookings = async () => {
+      try {
+        const res = await api.get(
+          `/bookings/provider/${providerId}/${date.format("YYYY-MM-DD")}`,
+          { signal: controller.signal },
+        );
         const times = res.data.map((item) => item.booking_time);
         setBookedSlots(times);
-      })
-      .catch(() => {
-        console.log("Error fetching booked slots");
-      });
-  }, [providerId, date]);
+      } catch (err) {
+        if (err.name !== "CanceledError") {
+          console.error("Error fetching booked slots", err);
+        }
+      }
+    };
+
+    fetchBookings();
+    return () => {
+      controller.abort();
+    };
+  }, [providerId, date, open]);
 
   const getTime = () => {
     const timeList = [];
-
-    for (let i = 9; i <= 12; i++) {
-      timeList.push({
-        time: i + ":00 AM",
-      });
-
-      timeList.push({
-        time: i + ":30 AM",
-      });
+    for (let i = 9; i <= 11; i++) {
+      timeList.push({ time: i + ":00 AM" });
+      timeList.push({ time: i + ":30 AM" });
     }
 
+    timeList.push({ time: "12:00 PM" }, { time: "12:30 PM" });
     for (let i = 1; i <= 3; i++) {
-      timeList.push({
-        time: i + ":00 PM",
-      });
-
-      timeList.push({
-        time: i + ":30 PM",
-      });
+      timeList.push({ time: i + ":00 PM" });
+      timeList.push({ time: i + ":30 PM" });
     }
-
     setTimeSlot(timeList);
   };
 
   const isTimeDisabled = (time) => {
-    const selectedDate = date;
-
-    if (!selectedDate.isSame(now, "day")) return false;
-
+    if (!date.isSame(now, "day")) return false;
     const [hourMin, period] = time.split(" ");
     let [hour, minute] = hourMin.split(":").map(Number);
-
     if (period === "PM" && hour !== 12) hour += 12;
     if (period === "AM" && hour === 12) hour = 0;
-
-    const slotTime = selectedDate.hour(hour).minute(minute);
-
+    const slotTime = date.hour(hour).minute(minute).second(0);
     return slotTime.isBefore(now);
   };
 
   const handleBooking = async (e) => {
     e.currentTarget.blur();
-
     if (!selectedTime) {
       setShowError(true);
       return;
     }
-
     try {
       const response = await api.post("/book", {
         date: date.format("YYYY-MM-DD"),
@@ -101,19 +97,12 @@ function MySheet({ children, customerId, providerId }) {
         customerId: customerId,
         providerId: providerId,
       });
-      setDate(dayjs());
-      setSelectedTime(null);
       setOpen(false);
-      console.log(response.data);
-      navigate(`/CustomerBookings/${response.data.result.user_id}`)
+      setSelectedTime(null);
+      const targetId = response.data.result?.user_id || customerId;
+      navigate(`/CustomerBookings/${targetId}`);
     } catch (error) {
-      if (error.response) {
-        alert("Something went wrong");
-        setSelectedTime(null);
-        setOpen(false);
-      } else {
-        alert("Server error");
-      }
+      alert("Booking failed. Please try again.");
     }
   };
 
@@ -121,16 +110,28 @@ function MySheet({ children, customerId, providerId }) {
     <>
       <div onClick={() => setOpen(true)}>{children}</div>
 
-      <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={() => setOpen(false)}
+        PaperProps={{
+          sx: {
+            width: 400,
+            maxWidth: "100vw",
+            "@media (max-width:400px)": {
+              width: "100%",
+            },
+          },
+        }}
+      >
         <div style={{ padding: "20px" }} className="sheet-container">
           <div className="sheet-top">
             <h2 className="book-services-heading">Book Service</h2>
             <CloseIcon
-              onClick={(e) => {
-                e.currentTarget.blur();
-                setSelectedTime(null);
-                setDate(dayjs());
+              onClick={() => {
                 setOpen(false);
+                setSelectedTime(null);
+                setBookedSlots([]); // Clear on close
               }}
               style={{
                 color: "rgb(125, 125, 125)",
@@ -142,16 +143,15 @@ function MySheet({ children, customerId, providerId }) {
           <p>Select date and time slot to book a service</p>
           <div className="select-date" style={{ margin: "20px 0" }}>
             <h3 className="select-date-heading">Select Date</h3>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              className="calender-container"
-            >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Paper
                 elevation={3}
                 sx={{
                   borderRadius: 3,
+                  width: "100%",
+                  margin: "20px 0",
                   maxWidth: 340,
-                  margin: "20px 5px",
+                  overflow: "hidden",
                 }}
               >
                 <DateCalendar
@@ -163,6 +163,17 @@ function MySheet({ children, customerId, providerId }) {
                     }
                   }}
                   minDate={dayjs()}
+                  sx={{
+                    width: "100%",
+                    maxWidth: 340,
+                    "& .MuiPickersCalendarHeader-root": {
+                      paddingLeft: "8px",
+                      paddingRight: "8px",
+                    },
+                    "& .MuiDayCalendar-weekContainer": {
+                      justifyContent: "space-between",
+                    },
+                  }}
                 />
               </Paper>
             </LocalizationProvider>
@@ -192,7 +203,7 @@ function MySheet({ children, customerId, providerId }) {
               })}
             </div>
           </div>
-          <div className={`no-time-slot`}>
+          <div className="no-time-slot">
             {showError && !selectedTime && <p>Please select a time slot</p>}
           </div>
           <div className="book">

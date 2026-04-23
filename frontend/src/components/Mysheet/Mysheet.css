@@ -16,8 +16,10 @@
     font-weight: 500;
 }
 
-.sheet-container{
-    width: 400px;
+.sheet-container {
+  width: 100%;
+  max-width: 400px;  
+  box-sizing: border-box;
 }
 
 .time-slot {
@@ -102,3 +104,46 @@
   cursor: not-allowed;
   border: 1px solid #ddd;
 }
+
+@media only screen and (max-width: 480px) {
+
+  .sheet-container {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .book-services-heading {
+    font-size: 18px;
+  }
+
+  .select-date-heading {
+    font-size: 14px;
+  }
+
+  .time-slot {
+    gap: 8px;
+  }
+
+  .time-slot button {
+    width: auto;        
+    flex: 1 1 45%;        
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .book {
+    margin-top: 15px;
+  }
+
+  .book-service-sheet {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .no-time-slot {
+    font-size: 12px;
+  }
+}
+
