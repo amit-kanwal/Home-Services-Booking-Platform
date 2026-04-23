@@ -1,64 +1,82 @@
 import React from "react";
 import { Calendar, Clock, MapPin, User } from "lucide-react";
-// import "./BookingHistoryList.css"; // optional
+import { useState } from "react";
+import dayjs from "dayjs";
+import api from "../../Utils/axiosApi";
+import "./BookingHistory.css";
 
-function BookingHistory({ bookingHistory}) {
-  // console.log(bookingHistory)
-
-  // const cancelAppointment = (booking) => {
-  //   // Replace with your axios call
-  //   console.log("Cancel booking:", booking.id);
-
-  //   // Example:
-  //   // api.delete(`/booking/${booking.id}`)
-  //   //   .then(() => alert("Booking cancelled"))
-  //   //   .catch(() => alert("Error cancelling booking"));
-  // };
-
+function BookingHistory({ bookingHistory, setBookingHistory }) {
+  const cancelAppointment = (booking) => {
+    const id = booking.id
+    api.post(`/CancelBooking/${id}`)
+    .then(()=>{
+      setBookingHistory((prev) =>
+        prev.map((item) =>
+          item.id === id
+            ? { ...item, status: "cancelled" }
+            : item
+        )
+      );
+    })
+    .catch((error)=>{
+      alert("Something went wrong")
+      console.log(error)
+    })
+  };
+  
   return (
     <div className="booking-layout">
       {bookingHistory.map((booking, index) => (
         <div className="booking-card" key={index}>
           <div className="booking-content">
-            
-            {booking?.businessList?.name && (
-              <img
-                src={booking?.businessList?.images[0]?.url}
-                alt="service"
-                className="booking-image"
-              />
-            )}
+            <img
+              src={`/${booking.category}.png`}
+              alt="service"
+              className="booking-image"
+            />
 
             <div className="booking-details">
-              <h2 className="title">{booking.businessList?.name}</h2>
+              <h2 className="title">{booking?.business_name}</h2>
 
-              <h3 className="info">
-                <User size={16} /> {booking.businessList?.contactPerson}
-              </h3>
+              <span className="info">
+                <User size={16} style={{ color: "purple" }} />{" "}
+                <p style={{ color: "var(--primary-color)", fontWeight: "700" }}>
+                  {booking?.name}
+                </p>
+              </span>
 
-              <h3 className="info">
-                <MapPin size={16} /> {booking.businessList?.address}
-              </h3>
+              <span className="info">
+                <MapPin size={16} style={{ color: "red" }} /> {booking?.address}
+              </span>
 
-              <h3 className="info">
-                <Calendar size={16} />
-                Service on: <span>{booking.date}</span>
-              </h3>
+              <span className="info booking-date-container">
+                <Calendar size={16} style={{ color: "grey" }} />
+                Service on:{" "}
+                <span >{dayjs(booking?.booking_date).format("DD-MM-YYYY")}</span>
+              </span>
 
-              <h3 className="info">
-                <Clock size={16} />
-                Time: <span>{booking.time}</span>
-              </h3>
+              <span className="info booking-on-date">
+                <Calendar size={16} style={{ color: "grey" }} />
+                On:{" "}
+                <span >{dayjs(booking?.booking_date).format("DD-MM-YYYY")}</span>
+              </span>
+
+              <span className="info">
+                <Clock size={16} style={{ color: "grey" }} />
+                Time: <span>{booking?.booking_time}</span>
+              </span>
             </div>
           </div>
-
-          {/* Cancel Button */}
-          <button
-            className="cancel-btn"
-            onClick={() => cancelAppointment(booking)}
-          >
-            Cancel Appointment
-          </button>
+          {booking.status === "active" && <div className="cancel-btn-container">
+            <button
+              className="cancel-btn"
+              onClick={() => cancelAppointment(booking)}
+              value={booking.id}
+            >
+              Cancel Booking
+            </button>
+          </div>}
+          
         </div>
       ))}
     </div>
