@@ -24,9 +24,21 @@ export const getBookingsCustomer = async (req , res)=>{
 
    try {
     const result = await pool.query(
-      `SELECT booking_time, booking_date, status
-       FROM bookings 
-       WHERE user_id = $1`,
+      `SELECT 
+        b.booking_time, 
+        b.booking_date, 
+        b.status,
+        p.name,
+        p.user_id,
+        p.category,
+        p.business_name,
+        b.provider_id,
+        p.address,
+        b.id
+       FROM bookings b
+       JOIN service_provider_info p
+       ON b.provider_id = p.user_id
+       WHERE b.user_id = $1`,
       [customerId]
     );
     res.json(result.rows);
