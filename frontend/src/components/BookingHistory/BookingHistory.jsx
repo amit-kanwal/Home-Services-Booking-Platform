@@ -7,26 +7,45 @@ import "./BookingHistory.css";
 
 function BookingHistory({ bookingHistory, setBookingHistory }) {
   const cancelAppointment = (booking) => {
-    const id = booking.id
-    api.post(`/CancelBooking/${id}`)
-    .then(()=>{
-      setBookingHistory((prev) =>
-        prev.map((item) =>
-          item.id === id
-            ? { ...item, status: "cancelled" }
-            : item
-        )
-      );
-    })
-    .catch((error)=>{
-      alert("Something went wrong")
-      console.log(error)
-    })
+    const id = booking.id;
+    api
+      .post(`/CancelBooking/${id}`)
+      .then(() => {
+        setBookingHistory((prev) =>
+          prev.map((item) =>
+            item.id === id ? { ...item, status: "cancelled" } : item,
+          ),
+        );
+      })
+      .catch((error) => {
+        alert("Something went wrong");
+        console.log(error);
+      });
   };
+
+ const isCurrentOrPast = (booking) => {
+  try {
+    if (!booking || !booking.date || !booking.time) return false;
+
+    const time24 = convertTo24Hour(booking.time);
+    if (!time24) return false;
+
+    const bookingDateTime = new Date(`${booking.date}T${time24}`);
+
+    if (isNaN(bookingDateTime.getTime())) return false;
+
+    return bookingDateTime <= new Date();
+  } catch (err) {
+    return false;
+  }
+};
+
   
   return (
     <div className="booking-layout">
-      {bookingHistory.map((booking, index) => (
+      {bookingHistory.map((booking, index) => {
+        const isDisabled = Boolean(isCurrentOrPast(booking));
+        return (
         <div className="booking-card" key={index}>
           <div className="booking-content">
             <img
@@ -52,13 +71,13 @@ function BookingHistory({ bookingHistory, setBookingHistory }) {
               <span className="info booking-date-container">
                 <Calendar size={16} style={{ color: "grey" }} />
                 Service on:{" "}
-                <span >{dayjs(booking?.booking_date).format("DD-MM-YYYY")}</span>
+                <span>{dayjs(booking?.booking_date).format("DD-MM-YYYY")}</span>
               </span>
 
               <span className="info booking-on-date">
                 <Calendar size={16} style={{ color: "grey" }} />
                 On:{" "}
-                <span >{dayjs(booking?.booking_date).format("DD-MM-YYYY")}</span>
+                <span>{dayjs(booking?.booking_date).format("DD-MM-YYYY")}</span>
               </span>
 
               <span className="info">
@@ -67,18 +86,20 @@ function BookingHistory({ bookingHistory, setBookingHistory }) {
               </span>
             </div>
           </div>
-          {booking.status === "active" && <div className="cancel-btn-container">
-            <button
-              className="cancel-btn"
-              onClick={() => cancelAppointment(booking)}
-              value={booking.id}
-            >
-              Cancel Booking
-            </button>
-          </div>}
-          
+          {booking.status === "active" && (
+            <div className="cancel-btn-container">
+              <button
+                className="cancel-btn"
+                onClick={() => cancelAppointment(booking)}
+                value={booking.id}
+                disabled={isDisabled}
+              >
+                Cancel Booking
+              </button>
+            </div>
+          )}
         </div>
-      ))}
+      )})}
     </div>
   );
 }

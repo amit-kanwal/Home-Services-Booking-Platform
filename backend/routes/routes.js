@@ -14,6 +14,8 @@ import { getProviderDetail } from '../controllers/businessDetailController.js'
 import { bookProvider } from '../controllers/bookProviderController.js'
 import { getBookings, getBookingsCustomer } from '../controllers/bookingsController.js'
 import { CancelBookings } from '../controllers/cancelBookingController.js'
+import { getProvider } from '../controllers/providerDashboardController.js'
+import { changePassword } from '../controllers/passwordChangeController.js'
 
 const router = express.Router()
 
@@ -32,6 +34,7 @@ router.post('/book', authMiddleware, bookProvider);
 router.get("/bookings/provider/:providerId/:date", authMiddleware, getBookings);
 router.get("/bookings/customer/:customerId", authMiddleware, getBookingsCustomer);
 router.post("/CancelBooking/:id", authMiddleware, CancelBookings);
-
+router.get("/providerInfo/:userId", authMiddleware, getProvider)
+router.put("/ChangePassword", authMiddleware, changePassword)
 
 export default router;

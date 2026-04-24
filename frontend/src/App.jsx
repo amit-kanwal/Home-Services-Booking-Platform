@@ -71,7 +71,7 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["service_provider"]}>
-                <ProviderDashboard />
+                <ProviderDashboard setToken={setToken} setUser={setUser}/>
               </RoleBasedRoute>
             </ProtectedRoute>
           }

@@ -32,11 +32,7 @@ function CustomerDashboard({ setToken, setUser }) {
         setCustomerInfo(userInfo);
       })
       .catch(() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setToken(null);
-        setUser(null);
-        navigate("/");
+        console.log(error)
       });
   }, []);
 
@@ -53,6 +49,7 @@ function CustomerDashboard({ setToken, setUser }) {
   useEffect(() => {
     setCurrentPage(1);
   }, [category]);
+
 
   const getProviderInfo = (category) => {
     api
