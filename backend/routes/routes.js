@@ -16,6 +16,7 @@ import { getBookings, getBookingsCustomer } from '../controllers/bookingsControl
 import { CancelBookings } from '../controllers/cancelBookingController.js'
 import { getProvider } from '../controllers/providerDashboardController.js'
 import { changePassword } from '../controllers/passwordChangeController.js'
+import { changeImage } from '../controllers/changeImageController.js'
 
 const router = express.Router()
 
@@ -36,5 +37,6 @@ router.get("/bookings/customer/:customerId", authMiddleware, getBookingsCustomer
 router.post("/CancelBooking/:id", authMiddleware, CancelBookings);
 router.get("/providerInfo/:userId", authMiddleware, getProvider)
 router.put("/ChangePassword", authMiddleware, changePassword)
+router.put("/ChangeImage/:userId", authMiddleware, upload.single("image"), changeImage)
 
 export default router;

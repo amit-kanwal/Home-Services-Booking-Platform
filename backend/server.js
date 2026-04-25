@@ -12,6 +12,14 @@ app.use(cookieParser())
 app.use('/api', routes)
 app.use('/uploads',express.static("uploads"))
 
+app.use((err, req, res, next) => {
+  console.error("Error", err.message);
+
+  res.status(400).json({
+    error: err.message || "Something went wrong",
+  });
+});
+
 app.listen(port, ()=>{
     console.log(`Server running on port: ${port}`)
 })
