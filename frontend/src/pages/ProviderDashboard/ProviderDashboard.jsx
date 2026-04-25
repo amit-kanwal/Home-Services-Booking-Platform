@@ -29,6 +29,7 @@ function ProviderDashboard({ setToken, setUser }) {
           email: result.data[0].email,
           address: result.data[0].address,
           username: result.data[0].username,
+          image : result.data[0].image_url
         };
         setProviderInfo(providerInfo);
       })
@@ -103,7 +104,7 @@ function ProviderDashboard({ setToken, setUser }) {
         <section className="right-provider" style={{ marginBottom: "10px" }}>
           {activeBtn === "profile" && <ProviderProfile />}
           {activeBtn === "editable" && <Editable />}
-          {activeBtn === "image" && <ChangeImage />}
+          {activeBtn === "image" && <ChangeImage image={providerInfo.image} userId={userId}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />
           )}
@@ -165,7 +166,7 @@ function ProviderDashboard({ setToken, setUser }) {
         >
           {activeBtn === "profile" && <ProviderProfile />}
           {activeBtn === "editable" && <Editable />}
-          {activeBtn === "image" && <ChangeImage />}
+          {activeBtn === "image" && <ChangeImage image={providerInfo.image} userId={userId}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />
           )}
