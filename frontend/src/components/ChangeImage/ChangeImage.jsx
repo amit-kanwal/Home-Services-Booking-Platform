@@ -1,17 +1,16 @@
 import "./ChangeImage.css";
 import { compressImage } from "../../Utils/CompressImage.js";
-import { useState, useRef , useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import api from "../../Utils/axiosApi.js";
 
-function ChangeImage({ image, userId }) {
-  const [image_url, setImageUrl] = useState(image);
+function ChangeImage({ image_url, userId, setImageUrl }) {
   const [imgBorder, setImgBorder] = useState("2px solid rgb(86, 189, 230)");
   const [compressedImage, setCompressedImage] = useState(null);
   const [errMessage, setErrMessage] = useState("");
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("");
   const fileInputRef = useRef(null);
-  const [showMessage , setShowMessage] = useState(false)
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleUpload = async (e) => {
     const file = e.target.files[0];
@@ -39,7 +38,7 @@ function ChangeImage({ image, userId }) {
     }
 
     const formData = new FormData();
-    formData.append("image", compressedImage); 
+    formData.append("image", compressedImage);
     try {
       const result = await api.put(`/ChangeImage/${userId}`, formData, {
         headers: {
@@ -51,8 +50,8 @@ function ChangeImage({ image, userId }) {
       setMessage(result.data.message);
       fileInputRef.current.value = "";
       setCompressedImage(null);
-      setImgBorder("2px solid rgb(86, 189, 230)")
-      setShowMessage(true)
+      setImgBorder("2px solid rgb(86, 189, 230)");
+      setShowMessage(true);
     } catch (err) {
       console.log("Error:", err);
 
@@ -69,15 +68,18 @@ function ChangeImage({ image, userId }) {
       setCompressedImage(null);
       setMessageColor("red");
       setMessage("Something went wrong");
-      setShowMessage(true)
+      setShowMessage(true);
+      setImgBorder("2px solid rgb(86, 189, 230)");
     }
   };
 
-  useEffect(()=>{
-    setTimeout(()=>{
-      setShowMessage(false)
-    },4000)
-  }, [showMessage])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMessage(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [showMessage]);
 
   return (
     <div className="image-change">
@@ -122,16 +124,16 @@ function ChangeImage({ image, userId }) {
           </button>
           {showMessage && (
             <div
-            className="err-message"
-            style={{
-              color: `${messageColor}`,
-              fontSize: "14px",
-              height: "10px",
-              textAlign: "center",
-            }}
-          >
-            {message}
-          </div>
+              className="err-message"
+              style={{
+                color: `${messageColor}`,
+                fontSize: "14px",
+                height: "10px",
+                textAlign: "center",
+              }}
+            >
+              {message}
+            </div>
           )}
         </div>
       </div>

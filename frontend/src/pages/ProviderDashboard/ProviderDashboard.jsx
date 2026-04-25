@@ -18,6 +18,7 @@ function ProviderDashboard({ setToken, setUser }) {
   const userId = user.id;
   const [activeBtn, setActiveBtn] = useState("profile");
   const [activeBtnTwo, setActiveBtnTwo] = useState("profile");
+  const [image_url, setImageUrl] = useState(null);
 
   useEffect(() => {
     api
@@ -31,12 +32,13 @@ function ProviderDashboard({ setToken, setUser }) {
           username: result.data[0].username,
           image : result.data[0].image_url
         };
+        setImageUrl(providerInfo.image)
         setProviderInfo(providerInfo);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [image_url]);
 
   const handleChangeImageBtnClick = () => {
     setActiveBtn("image");
@@ -104,7 +106,7 @@ function ProviderDashboard({ setToken, setUser }) {
         <section className="right-provider" style={{ marginBottom: "10px" }}>
           {activeBtn === "profile" && <ProviderProfile />}
           {activeBtn === "editable" && <Editable />}
-          {activeBtn === "image" && <ChangeImage image={providerInfo.image} userId={userId}/>}
+          {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />
           )}
@@ -166,7 +168,7 @@ function ProviderDashboard({ setToken, setUser }) {
         >
           {activeBtn === "profile" && <ProviderProfile />}
           {activeBtn === "editable" && <Editable />}
-          {activeBtn === "image" && <ChangeImage image={providerInfo.image} userId={userId}/>}
+          {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />
           )}
