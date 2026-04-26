@@ -24,7 +24,6 @@ function ProviderDashboard({ setToken, setUser }) {
     api
       .get(`/providerInfo/${userId}`)
       .then((result) => {
-        console.log(result.data)
         const providerInfo = {
           name: result.data[0].name,
           phone: result.data[0].contact,
@@ -110,7 +109,7 @@ function ProviderDashboard({ setToken, setUser }) {
         </section>
         <section className="right-provider" style={{ marginBottom: "10px" }}>
           {activeBtn === "profile" && <ProviderProfile provider={providerInfo}/>}
-          {activeBtn === "editable" && <Editable  provider={providerInfo}/>}
+          {activeBtn === "editable" && <Editable  provider={providerInfo} userId={userId}/>}
           {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />
@@ -172,7 +171,7 @@ function ProviderDashboard({ setToken, setUser }) {
           style={{ marginBottom: "10px", height: "max-content" }}
         >
           {activeBtn === "profile" && <ProviderProfile provider={providerInfo}/>}
-          {activeBtn === "editable" && <Editable provider={providerInfo}/>}
+          {activeBtn === "editable" && <Editable provider={providerInfo} userId={userId}/>}
           {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />

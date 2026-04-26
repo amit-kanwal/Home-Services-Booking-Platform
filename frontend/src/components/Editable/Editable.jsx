@@ -1,18 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Editable.css";
+import api from "../../Utils/axiosApi.js";
 
-const Editable = ({ provider }) => {
+const Editable = ({ provider, userId }) => {
   const [editingField, setEditingField] = useState(null);
   const inputRef = useRef(null);
   const [isEdit, changeEdit] = useState(false);
   const textRef = useRef(null);
   const [descHeight, setDescHeight] = useState("auto");
   const [descWidth, setDescWidth] = useState("auto");
+  const [emailErr, setEmailErr] = useState("")
+  const [phoneErr, setPhoneErr] = useState("")
+  const [phoneErrVisibility, setPhoneErrVisibility] = useState("hidden")
+  const [emailErrVisibility, setEmailErrVisibility] = useState("hidden")
 
   const [formData, setFormData] = useState({
     email: provider.email,
-    phone: provider.phone,
-    description: provider.about,
+    contact: provider.phone,
+    about: provider.about,
     price: provider.price,
   });
 
@@ -38,18 +43,83 @@ const Editable = ({ provider }) => {
 
   const handleEdit = (field) => {
     changeEdit(true);
-    if (field === "description" && textRef.current) {
-    setDescHeight(textRef.current.offsetHeight + "px");
-    setDescWidth(textRef.current.offsetWidth + "px");
-  }
+    if (field === "about" && textRef.current) {
+      setDescHeight(textRef.current.offsetHeight + "px");
+      setDescWidth(textRef.current.offsetWidth + "px");
+    }
     setEditingField(field);
   };
 
-  const handleSave = () => {
-    // TODO: API call here
+  const fieldMap = {
+    email: "email",
+    contact: "contact",
+    about: "about",
+    price: "price",
+  };
+
+  const handleSave = async () => {
+    try {
+      const updatedValue = formData[editingField];
+
+      if (!updatedValue) {
+        alert("Field cannot be empty");
+        return;
+      }
+
+      const dbField = fieldMap[editingField];
+
+      await api.put(`/provider/update/${userId}`, {
+        field: dbField,
+        value: updatedValue,
+      });
+
+      changeEdit(false);
+      setEditingField(null);
+    } catch (err) {
+      let field;
+
+      if (err.response && err.response.data) {
+        field = err.response.data.field;
+      }
+
+      if (field === "email") {
+        setEmailErr("Email already exists") 
+        setEmailErrVisibility("visible")
+      }
+      else if (field === "contact") {
+        setPhoneErr("Phone number already exists")
+        setPhoneErrVisibility("visible")
+      }
+      else{
+        alert("Something went wrong")
+      }
+      changeEdit(false);
+      setEditingField(null);
+      console.log("Update failed: ", err);
+    }
+  };
+
+  const handleCancel = () => {
+    setFormData({
+      email: provider.email,
+      contact: provider.phone,
+      about: provider.about,
+      price: provider.price,
+    });
     changeEdit(false);
     setEditingField(null);
   };
+
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      setPhoneErrVisibility("hidden")
+      setEmailErrVisibility("hidden")
+      setPhoneErr("")
+      setEmailErr("")
+    }, 4000)
+
+    return ()=> clearTimeout(timer)
+  }, [phoneErr , emailErr])
 
   return (
     <div className="editable-container">
@@ -66,9 +136,14 @@ const Editable = ({ provider }) => {
               onChange={handleChange}
               className="email-change-input change-input"
             />
-            <button onClick={handleSave} className="provider-save-btn">
-              Update
-            </button>
+            <div className="provider-change-btn">
+              <button onClick={handleSave} className="provider-save-btn">
+                Update
+              </button>
+              <button onClick={handleCancel} className="provider-cancel-btn">
+                Cancel
+              </button>
+            </div>
           </>
         ) : (
           <>
@@ -80,18 +155,19 @@ const Editable = ({ provider }) => {
             >
               Edit
             </button>
+            <div style={{color : "red" , visibility : `${emailErrVisibility}`}}>{emailErr}</div>
           </>
         )}
       </div>
 
       <div className="editable-field">
         <label className="editable-label">Phone</label>
-        {editingField === "phone" ? (
+        {editingField === "contact" ? (
           <>
             <input
               ref={inputRef}
-              name="phone"
-              value={formData.phone}
+              name="contact"
+              value={formData.contact}
               onChange={handleChange}
               type="tel"
               minLength={10}
@@ -99,45 +175,68 @@ const Editable = ({ provider }) => {
               pattern="\d{10}"
               className="editable-phone-input change-input"
             />
-            <button onClick={handleSave} className="provider-save-btn">
-              Save
-            </button>
+            <div className="provider-change-btn">
+              <button onClick={handleSave} className="provider-save-btn">
+                Update
+              </button>
+              <button onClick={handleCancel} className="provider-cancel-btn">
+                Cancel
+              </button>
+            </div>
           </>
         ) : (
           <>
-            <p className="phone-data-change">{formData.phone}</p>
+            <p className="phone-data-change">{formData.contact}</p>
             <button
-              onClick={() => handleEdit("phone")}
+              onClick={() => handleEdit("contact")}
               disabled={isEdit}
               className="provider-detail-edit-btn"
             >
               Edit
             </button>
+            <div style={{color : "red" , visibility : `${phoneErrVisibility}`}}>{phoneErr}</div>
           </>
         )}
       </div>
 
       <div className="editable-field">
         <label className="editable-label">Description</label>
-        {editingField === "description" ? (
+        {editingField === "about" ? (
           <>
             <textarea
               ref={inputRef}
-              name="description"
-              value={formData.description}
+              name="about"
+              value={formData.about}
               onChange={handleChange}
-              style={{ height: descHeight, width: descWidth , padding : "10px" , fontFamily : "system-ui", fontSize : "14px"}}
+              style={{
+                height: descHeight,
+                width: descWidth,
+                padding: "10px",
+                fontFamily: "system-ui",
+                fontSize: "14px",
+              }}
               className="change-input"
             />
-            <button onClick={handleSave} className="provider-save-btn">Save</button>
+            <div className="provider-change-btn">
+              <button onClick={handleSave} className="provider-save-btn">
+                Update
+              </button>
+              <button onClick={handleCancel} className="provider-cancel-btn">
+                Cancel
+              </button>
+            </div>
           </>
         ) : (
           <>
-            <p ref={textRef} className="editable-description-text" style={{width : "90%"}}>
-              {formData.description}
+            <p
+              ref={textRef}
+              className="editable-description-text"
+              style={{ width: "90%" }}
+            >
+              {formData.about}
             </p>
             <button
-              onClick={() => handleEdit("description")}
+              onClick={() => handleEdit("about")}
               disabled={isEdit}
               className="provider-detail-edit-btn"
             >
@@ -158,15 +257,23 @@ const Editable = ({ provider }) => {
               value={formData.price}
               onChange={handleChange}
               className="change-input"
-              style={{width : "80px", height : "30px"}}
+              style={{ width: "80px", height: "30px" }}
+              min="1"
             />
-            <button onClick={handleSave} className="provider-save-btn">
-              Save
-            </button>
+            <div className="provider-change-btn">
+              <button onClick={handleSave} className="provider-save-btn">
+                Update
+              </button>
+              <button onClick={handleCancel} className="provider-cancel-btn">
+                Cancel
+              </button>
+            </div>
           </>
         ) : (
           <>
-            <p style={{height : "30px"}}>&#8377;{formData.price}/hour</p>
+            <p style={{ height: "30px" }}>
+              &#8377;{formData.price}/hour
+            </p>
             <button
               onClick={() => handleEdit("price")}
               disabled={isEdit}
