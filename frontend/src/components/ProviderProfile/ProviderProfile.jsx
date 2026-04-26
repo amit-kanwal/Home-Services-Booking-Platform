@@ -10,10 +10,10 @@ export default function ProviderProfile({provider , bookingInfo}) {
       
       <div className="provider-card-dashboard">
         <div className="avatar">
-          {provider?.name ? provider?.name.charAt(0) : "?"}
+          {provider?.businessName ? provider?.businessName.charAt(0) : "?"}
         </div>
 
-        <h2 className="name">{provider?.name}</h2>
+        <h2 className="business-name">{provider?.businessName}</h2>
         <p className="username">@{provider?.username}</p>
 
         <div className="provider-info-dashboard">

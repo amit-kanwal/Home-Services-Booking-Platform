@@ -1,0 +1,122 @@
+.editable-container{
+    width: 90%;
+    padding: 10px 30px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px auto;
+}
+
+.editable-title{
+    text-align: center;
+    margin: 10px;
+    font-size: 2rem;
+    font-weight: 500;
+    color: rgb(11, 72, 93);
+}
+
+.editable-field{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.editable-label{
+    font-size: 1.3rem;
+    color: rgb(11, 72, 93);
+}
+
+.email-field{
+    height: 100px;
+}
+
+.email-change-data{
+    height: 30px;
+    width: max-content;
+}
+
+.email-change-input{
+    height: 30px;
+    width: 250px;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 1px solid var(--primary-color);
+    box-shadow: 2px 2px 2px var(--primary-color);
+}
+.change-input:focus{
+    outline: none;
+    border: 1px solid var(--primary-color);
+    box-shadow: 2px 2px 2px var(--primary-color);
+}
+
+.provider-detail-edit-btn{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-top: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.provider-detail-edit-btn:hover{
+    background-color: green;
+}
+
+.provider-save-btn{
+   width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-top: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.provider-save-btn:hover{
+    background-color: green;
+}
+
+.phone-data-change{
+    height: 30px;
+    width: max-content;
+}
+
+.editable-phone-input{
+    height: 30px;
+    width: 150px;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 1px solid var(--primary-color);
+    box-shadow: 2px 2px 2px var(--primary-color);
+}
+
+
+.provider-detail-edit-btn:disabled {
+  cursor: not-allowed; 
+  opacity: 0.6;
+  outline: none;
+  pointer-events: none; 
+}
+
+@media only screen and (max-width: 350px){
+    .email-change-input{
+        width: 90%;
+    }
+
+    .editable-container{
+    width: 100%;
+    background-color: white;
+    border-radius: 0px;
+    padding : 10px 8px;
+    margin : 20px auto 0;
+}
+}

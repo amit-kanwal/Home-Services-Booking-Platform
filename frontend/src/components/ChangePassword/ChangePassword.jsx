@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import "./ChangePassword.css";
-import { useState, useEffect } from "react";
 import api from "../../Utils/axiosApi.js";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -91,7 +91,7 @@ function ChangePassword({ username }) {
         setResponse(true);
       })
       .catch((err) => {
-        let field = err?.response?.data?.field;
+        const field = err?.response?.data?.field;
 
         if (field === "oldPassword") {
           setMessage("Old password does not match");
@@ -113,43 +113,79 @@ function ChangePassword({ username }) {
       });
   };
 
-  const renderInput = (label, name, fieldKey) => (
-    <div className="change-pass-element">
-      <label htmlFor={name}>{label}</label>
-      <div style={{display : "flex", gap : "10px", alignItems : "center"}}>
-        <input
-          type={showPassword[fieldKey] ? "text" : "password"}
-          placeholder={label}
-          id={name}
-          name={name}
-          required
-          value={passwordData[name]}
-          onChange={handlePasswordFormChange}
-          className="change-password-input"
-        />
-        <span onClick={() => togglePassword(fieldKey)}>
-          {showPassword[fieldKey] ? <FaEyeSlash /> : <FaEye />}
-        </span>
-      </div>
-
-      <div>
-        {errors[name] && <p>{errors[name]}</p>}
-      </div>
-    </div>
-  );
-
   return (
     <div className="password-change">
       <h3 className="change-password-heading">Change Password</h3>
 
       <form className="form-change-password" onSubmit={handleOnSubmit}>
-        {renderInput("Enter old password", "oldPassword", "old")}
-        {renderInput("Enter new password", "newPassword", "new")}
-        {renderInput(
-          "Confirm new password",
-          "confirmNewPassword",
-          "confirm"
-        )}
+        
+        <div className="change-pass-element">
+          <label htmlFor="oldPassword">Enter old password</label>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <input
+              type={showPassword.old ? "text" : "password"}
+              placeholder="Enter old password"
+              id="oldPassword"
+              name="oldPassword"
+              required
+              value={passwordData.oldPassword}
+              onChange={handlePasswordFormChange}
+              className="change-password-input"
+            />
+            <span onClick={() => togglePassword("old")}>
+              {showPassword.old ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+          <div>
+            {errors.oldPassword && <p>{errors.oldPassword}</p>}
+          </div>
+        </div>
+
+        <div className="change-pass-element">
+          <label htmlFor="newPassword">Enter new password</label>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <input
+              type={showPassword.new ? "text" : "password"}
+              placeholder="Enter new password"
+              id="newPassword"
+              name="newPassword"
+              required
+              value={passwordData.newPassword}
+              onChange={handlePasswordFormChange}
+              className="change-password-input"
+            />
+            <span onClick={() => togglePassword("new")}>
+              {showPassword.new ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+          <div>
+            {errors.newPassword && <p>{errors.newPassword}</p>}
+          </div>
+        </div>
+
+        <div className="change-pass-element">
+          <label htmlFor="confirmNewPassword">Confirm new password</label>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <input
+              type={showPassword.confirm ? "text" : "password"}
+              placeholder="Confirm new password"
+              id="confirmNewPassword"
+              name="confirmNewPassword"
+              required
+              value={passwordData.confirmNewPassword}
+              onChange={handlePasswordFormChange}
+              className="change-password-input"
+            />
+            <span onClick={() => togglePassword("confirm")}>
+              {showPassword.confirm ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+          <div>
+            {errors.confirmNewPassword && (
+              <p>{errors.confirmNewPassword}</p>
+            )}
+          </div>
+        </div>
 
         <div className="change-password-btn-container">
           <button type="submit" className="change-pass-btn">

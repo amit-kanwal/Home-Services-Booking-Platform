@@ -24,6 +24,7 @@ function ProviderDashboard({ setToken, setUser }) {
     api
       .get(`/providerInfo/${userId}`)
       .then((result) => {
+        console.log(result.data)
         const providerInfo = {
           name: result.data[0].name,
           phone: result.data[0].contact,
@@ -31,7 +32,10 @@ function ProviderDashboard({ setToken, setUser }) {
           address: result.data[0].address,
           username: result.data[0].username,
           image : result.data[0].image_url,
-          category : result.data[0].category
+          category : result.data[0].category,
+          businessName : result.data[0].business_name,
+          price : result.data[0].price,
+          about : result.data[0].about
         };
         setImageUrl(providerInfo.image)
         setProviderInfo(providerInfo);
@@ -85,7 +89,7 @@ function ProviderDashboard({ setToken, setUser }) {
               className={`pro-btn ${activeBtn === "editable" ? "active-provider-btn" : "non-active-provider-btn"}`}
               onClick={handleEditableBtnClick}
             >
-              Editable
+              Update Profile
             </button>
             <button
               className={`pro-btn ${activeBtn === "image" ? "active-provider-btn" : "non-active-provider-btn"}`}
@@ -100,13 +104,13 @@ function ProviderDashboard({ setToken, setUser }) {
               Change Password
             </button>
           </div>
-          <div style={{ margin: "0 auto 10px" }}>
+          <div style={{ margin: "0 auto 20px !important" }}>
             <Logout setUser={setUser} setToken={setToken} />
           </div>
         </section>
         <section className="right-provider" style={{ marginBottom: "10px" }}>
           {activeBtn === "profile" && <ProviderProfile provider={providerInfo}/>}
-          {activeBtn === "editable" && <Editable />}
+          {activeBtn === "editable" && <Editable  provider={providerInfo}/>}
           {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />
@@ -144,7 +148,7 @@ function ProviderDashboard({ setToken, setUser }) {
               className={`pro-btn ${activeBtn === "editable" ? "active-provider-btn" : "non-active-provider-btn"}`}
               onClick={handleEditableBtnClick}
             >
-              Editable
+              Update Profile
             </button>
             <button
               className={`pro-btn ${activeBtn === "image" ? "active-provider-btn" : "non-active-provider-btn"}`}
@@ -168,7 +172,7 @@ function ProviderDashboard({ setToken, setUser }) {
           style={{ marginBottom: "10px", height: "max-content" }}
         >
           {activeBtn === "profile" && <ProviderProfile provider={providerInfo}/>}
-          {activeBtn === "editable" && <Editable />}
+          {activeBtn === "editable" && <Editable provider={providerInfo}/>}
           {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
             <ChangePassword username={providerInfo.username} />

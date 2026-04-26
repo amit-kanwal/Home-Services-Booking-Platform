@@ -9,7 +9,6 @@
     flex-direction: column;
     padding-left: 5px;
     align-items: center;
-    position: sticky;
 }
 
 .whole-provider{
@@ -35,7 +34,6 @@
     font-weight: 500;
     color: blue;
 }
-
 
 .active-provider-btn {
     background-color: var(--primary-color);
@@ -91,7 +89,6 @@
     display: none;
 }
 
-
 @media only screen and (max-width : 900px) {
     .provider-dashboard-layout {
         display: none;
@@ -141,6 +138,12 @@
         align-items: center;
         width: 100%;
     }
-
-
+}
+@media only screen and (max-width : 230px) {
+    .login-top-info-two{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
