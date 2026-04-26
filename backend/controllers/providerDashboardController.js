@@ -16,7 +16,8 @@ try{
                 p.address,
                 p.about,
                 p.price,
-                p.business_name
+                p.business_name,
+                p.contact
             FROM users u
             JOIN service_provider_info p
             ON u.id = p.user_id

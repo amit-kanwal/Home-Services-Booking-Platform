@@ -30,7 +30,8 @@ function ProviderDashboard({ setToken, setUser }) {
           email: result.data[0].email,
           address: result.data[0].address,
           username: result.data[0].username,
-          image : result.data[0].image_url
+          image : result.data[0].image_url,
+          category : result.data[0].category
         };
         setImageUrl(providerInfo.image)
         setProviderInfo(providerInfo);
@@ -104,7 +105,7 @@ function ProviderDashboard({ setToken, setUser }) {
           </div>
         </section>
         <section className="right-provider" style={{ marginBottom: "10px" }}>
-          {activeBtn === "profile" && <ProviderProfile />}
+          {activeBtn === "profile" && <ProviderProfile provider={providerInfo}/>}
           {activeBtn === "editable" && <Editable />}
           {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
@@ -166,7 +167,7 @@ function ProviderDashboard({ setToken, setUser }) {
           className="bottom-provider"
           style={{ marginBottom: "10px", height: "max-content" }}
         >
-          {activeBtn === "profile" && <ProviderProfile />}
+          {activeBtn === "profile" && <ProviderProfile provider={providerInfo}/>}
           {activeBtn === "editable" && <Editable />}
           {activeBtn === "image" && <ChangeImage image_url={providerInfo.image} userId={userId} setImageUrl={setImageUrl}/>}
           {activeBtn === "password" && (
