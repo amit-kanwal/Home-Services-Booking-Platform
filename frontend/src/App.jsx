@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect , useState} from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Home from "./pages/Home/Home";
 import Services from "./pages/Services/Services";
@@ -17,11 +17,11 @@ import CustomerBooking from "./pages/Bookings/CustomerBookings/CustomerBooking";
 import CustomerProfile from "./pages/CustomerProfile/CustomerProfile";
 import ProviderDetail from "./pages/ProviderDetail/ProviderDetail";
 import ProviderBooking from "./pages/Bookings/ProviderBookingPage/ProviderBooking";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashbord";
 
 function App() {
-
-  const [token , setToken] = useState(localStorage.getItem('token'))
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   return (
     <>
@@ -29,11 +29,15 @@ function App() {
         <Route
           path="/"
           element={
-            token ? (
-              user?.role === "customer" ? (
-                <Navigate to ="/Customer_dashboard"/>
+            token && user ? (
+              user.role === "customer" ? (
+                <Navigate to="/Customer_dashboard" />
+              ) : user.role === "service_provider" ? (
+                <Navigate to="/Provider_dashboard" />
+              ) : user.role === "admin" ? (
+                <Navigate to="/Admin_dashboard" />
               ) : (
-                <Navigate to ="/Provider_dashboard"/>
+                <Home />
               )
             ) : (
               <Home />
@@ -62,7 +66,7 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["customer"]}>
-                <CustomerDashboard setToken={setToken} setUser={setUser}/>
+                <CustomerDashboard setToken={setToken} setUser={setUser} />
               </RoleBasedRoute>
             </ProtectedRoute>
           }
@@ -72,7 +76,17 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["service_provider"]}>
-                <ProviderDashboard setToken={setToken} setUser={setUser}/>
+                <ProviderDashboard setToken={setToken} setUser={setUser} />
+              </RoleBasedRoute>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Admin_dashboard"
+          element={
+            <ProtectedRoute>
+              <RoleBasedRoute allowedRoles={["admin"]}>
+                <AdminDashboard setToken={setToken} setUser={setUser} />
               </RoleBasedRoute>
             </ProtectedRoute>
           }
@@ -92,7 +106,7 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["customer"]}>
-                <CustomerBooking/>
+                <CustomerBooking />
               </RoleBasedRoute>
             </ProtectedRoute>
           }
@@ -102,7 +116,7 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["service_provider"]}>
-                <ProviderBooking/>
+                <ProviderBooking />
               </RoleBasedRoute>
             </ProtectedRoute>
           }

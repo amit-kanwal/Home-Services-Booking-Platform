@@ -35,27 +35,33 @@ function Login() {
                 navigate('/Customer_dashboard')
             }
 
-            if(data.role == 'service_provider'){
+            else if(data.role === 'service_provider'){
                 navigate('/Provider_dashboard')
+            }
+
+            else if(data.role === 'admin'){
+                navigate('/Admin_dashboard')
             }
         } catch(err){
             alert(err.response?.data?.message || "Login failed");
         }
     }
 
-    const [token, setToken] = useState(null)
-    const [user, setUser] = useState(null)
-
     useEffect(()=>{
-        setToken(localStorage.getItem("token"))
-        setUser(JSON.parse(localStorage.getItem('user')))
-        if(token){
+        const token = localStorage.getItem("token")
+        const user = JSON.parse(localStorage.getItem("user"))
+
+        if(token && user){
             if(user?.role === 'customer'){
                 navigate('/Customer_dashboard')
             }
 
-            if(user?.role === 'service_provider'){
+            else if(user?.role === 'service_provider'){
                 navigate('/Provider_dashboard')
+            }
+
+            else if(user?.role === 'admin'){
+                navigate('/Admin_dashboard')
             }
         }
     }, [])
