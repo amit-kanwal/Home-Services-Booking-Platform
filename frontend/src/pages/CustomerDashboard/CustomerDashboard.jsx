@@ -50,7 +50,6 @@ function CustomerDashboard({ setToken, setUser }) {
     setCurrentPage(1);
   }, [category]);
 
-
   const getProviderInfo = (category) => {
     api
       .get(

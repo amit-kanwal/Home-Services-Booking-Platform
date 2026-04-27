@@ -1,0 +1,57 @@
+.booking-card-provider {
+  border-radius: 12px;
+  padding: 15px;
+  background: #fff;
+  width: 300px;
+}
+
+.btn-container-bookings{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  
+}
+
+.cancel-btn-provider{
+  height: 30px;
+  width: 130px;
+  border: none;
+  background-color: red;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.complete-btn{
+  height: 30px;
+  width: 130px;
+  border: none;
+  background-color: green;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.complete-btn:disabled{
+  cursor: not-allowed;
+}
+
+.complete-btn:hover{
+  background-color: var(--primary-color);
+}
+
+.cancel-btn-provider:hover{
+  background-color: var(--primary-color);
+}
+
+.cancel-btn-provider:disabled{
+  cursor: not-allowed;
+}
+
+@media only screen and (max-width : 360px){
+  .btn-container-bookings{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+}

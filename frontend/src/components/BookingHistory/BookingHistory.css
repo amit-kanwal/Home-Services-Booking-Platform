@@ -64,6 +64,9 @@
   background: #fff;
   color: #ff4d4f;
 }
+.cancel-btn:disabled {
+  cursor: not-allowed;
+}
 
 @media only screen and (max-width : 400px){
   .booking-content {

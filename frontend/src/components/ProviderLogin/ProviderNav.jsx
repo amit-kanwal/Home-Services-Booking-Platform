@@ -19,7 +19,7 @@ function ProviderNav() {
   };
 
   const handleBookingclick = () => {
-    navigate(`/ProviderBookings/${userId}`);
+    navigate(`/ProviderBooking/${userId}`);
   };
 
 

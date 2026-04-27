@@ -7,12 +7,12 @@ export const CancelBookings = async (req, res) => {
     const result = await pool.query(
       `UPDATE bookings
        SET status = $1
-       WHERE id = $2
+       WHERE id = $2 AND status = 'active'
        RETURNING *`,
       [status, id],
     );
 
-    res.json(result.rows);
+    res.json(result.rows[0]);
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: "Server error" });

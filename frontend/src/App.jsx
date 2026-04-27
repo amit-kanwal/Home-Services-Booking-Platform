@@ -16,6 +16,7 @@ import ProviderDashboard from "./pages/ProviderDashboard/ProviderDashboard";
 import CustomerBooking from "./pages/Bookings/CustomerBookings/CustomerBooking";
 import CustomerProfile from "./pages/CustomerProfile/CustomerProfile";
 import ProviderDetail from "./pages/ProviderDetail/ProviderDetail";
+import ProviderBooking from "./pages/Bookings/ProviderBookingPage/ProviderBooking";
 
 function App() {
 
@@ -92,6 +93,16 @@ function App() {
             <ProtectedRoute>
               <RoleBasedRoute allowedRoles={["customer"]}>
                 <CustomerBooking/>
+              </RoleBasedRoute>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ProviderBooking/:userId"
+          element={
+            <ProtectedRoute>
+              <RoleBasedRoute allowedRoles={["service_provider"]}>
+                <ProviderBooking/>
               </RoleBasedRoute>
             </ProtectedRoute>
           }
