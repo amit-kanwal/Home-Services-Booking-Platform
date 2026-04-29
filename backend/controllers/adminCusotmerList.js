@@ -11,7 +11,7 @@ export const getCustomers = async (req, res)=>{
                 c.name,
                 c.address,
                 u.email,
-                c.contact,
+                c.contact
             FROM users u
             JOIN customer_info c
             ON u.id = c.user_id

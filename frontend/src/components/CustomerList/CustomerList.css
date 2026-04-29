@@ -1,0 +1,16 @@
+.admin-users-grid{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width : 575px) {
+    .admin-users-grid{
+    align-items: center;
+    justify-content: center;
+}
+.customer-list-heading{
+    text-align: center;
+}
+}

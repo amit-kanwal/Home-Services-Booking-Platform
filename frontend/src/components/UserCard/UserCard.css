@@ -1,17 +1,18 @@
 .user-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
   gap: 12px;
   margin: 15px;
   box-shadow: 1px 8px 20px rgba(0, 0, 0, 0.1);
+  width: 250px;
 }
 
-.user-card-header{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.user-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .user-avatar {
@@ -31,11 +32,13 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: #1f2937;
+  text-align: center;
 }
 
 .user-username {
   font-size: 13px;
   color: #6b7280;
+  text-align: center;
 }
 
 .user-card-info {
@@ -91,4 +94,12 @@
 .user-id {
   font-size: 12px;
   color: #9ca3af;
+}
+
+@media only screen and (max-width : 270px){
+  .user-container {
+    padding: 10px;
+  margin: 10px;
+  width: 95%;
+}
 }

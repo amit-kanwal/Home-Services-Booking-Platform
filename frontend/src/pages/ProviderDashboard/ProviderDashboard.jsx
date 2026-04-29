@@ -163,7 +163,7 @@ function ProviderDashboard({ setToken, setUser }) {
             </button>
           </div>
           <div className="dropdown-element">
-            <Dropdown value={activeBtn} onChange={(val) => setActiveBtn(val)} />
+            <Dropdown admin={false} value={activeBtn} onChange={(val) => setActiveBtn(val)} />
           </div>
         </section>
         <section

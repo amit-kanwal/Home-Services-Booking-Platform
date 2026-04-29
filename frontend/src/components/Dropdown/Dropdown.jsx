@@ -1,16 +1,26 @@
 import { useState, useRef, useEffect } from "react";
 import "./Dropdown.css"
 
-function Dropdown({ value, onChange }) {
+function Dropdown({ value, onChange , admin}) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef();
-
-  const options = [
+  let options
+  if(admin){
+    options = [
+    { label: "My Profile", value: "profile" },
+    { label: "Flagged Bookings", value: "flaggedBookings" },
+    { label: "Customer List", value: "customer" },
+    { label: "Provider List", value: "provider" },
+  ];
+  }
+  else{
+    options = [
     { label: "My Profile", value: "profile" },
     { label: "Editable", value: "editable" },
     { label: "Change Image", value: "image" },
     { label: "Change Password", value: "password" },
   ];
+  }  
 
   useEffect(() => {
     const handleClickOutside = (e) => {

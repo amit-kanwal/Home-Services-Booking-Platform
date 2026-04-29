@@ -13,24 +13,29 @@ import Dropdown from "../../components/Dropdown/Dropdown.jsx";
 
 function AdminDashboard({ setToken, setUser }) {
   const navigate = useNavigate();
+
   const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user.id;
+  const userId = user?.id;
+
   const [activeBtn, setActiveBtn] = useState("profile");
-  const [activeBtnTwo, setActiveBtnTwo] = useState("profile");
-  const [username , setUsername] = useState("")
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
+    if (!userId) return;
+
     api
       .get(`/adminInfo/${userId}`)
       .then((result) => {
-        setUsername(result.data[0].username)
-        setEmail(result.data[0].email)
+        if (result?.data?.length > 0) {
+          setUsername(result.data[0].username);
+          setEmail(result.data[0].email);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [userId]);
 
   const handleFlaggedBookingsBtnClick = () => {
     setActiveBtn("flaggedBookings");
@@ -85,31 +90,27 @@ function AdminDashboard({ setToken, setUser }) {
               Customer List
             </button>
             <button
-              className={`pro-btn ${activeBtn === "password" ? "active-provider-btn" : "non-active-provider-btn"}`}
+              className={`pro-btn ${activeBtn === "provider" ? "active-provider-btn" : "non-active-provider-btn"}`}
               onClick={handleProviderListBtnClick}
             >
-             Provider List
+              Provider List
             </button>
           </div>
-          <div style={{ margin: "0 auto 20px !important" }}>
+          <div style={{ margin: "0 auto 20px" }}>
             <Logout setUser={setUser} setToken={setToken} />
           </div>
         </section>
+
         <section className="right-provider" style={{ marginBottom: "10px" }}>
           {activeBtn === "profile" && (
-            <AdminProfile username = {username} email={email}/>
+            <AdminProfile username={username} email={email} />
           )}
-          {activeBtn === "flaggedBookings" && (
-            <FlaggedBookings />
-          )}
-          {activeBtn === "customer" && (
-            <CustomerList/>
-          )}
-          {activeBtn === "provider" && (
-            <ProviderList />
-          )}
+          {activeBtn === "flaggedBookings" && <FlaggedBookings />}
+          {activeBtn === "customer" && <CustomerList />}
+          {activeBtn === "provider" && <ProviderList />}
         </section>
       </div>
+
       <div className="provider-dashboard-layout-two">
         <section className="whole-provider">
           <div className="top-info-provider-two">
@@ -157,25 +158,20 @@ function AdminDashboard({ setToken, setUser }) {
             </button>
           </div>
           <div className="dropdown-element">
-            <Dropdown value={activeBtn} onChange={(val) => setActiveBtn(val)} />
+            <Dropdown value={activeBtn} onChange={(val) => setActiveBtn(val)} admin={true}/>
           </div>
         </section>
+
         <section
           className="bottom-provider"
           style={{ marginBottom: "10px", height: "max-content" }}
         >
           {activeBtn === "profile" && (
-            <AdminProfile username = {username} email={email}/>
+            <AdminProfile username={username} email={email} />
           )}
-          {activeBtn === "editable" && (
-            <FlaggedBookings />
-          )}
-          {activeBtn === "image" && (
-            <CustomerList/>
-          )}
-          {activeBtn === "password" && (
-            <ProviderList/>
-          )}
+          {activeBtn === "flaggedBookings" && <FlaggedBookings />}
+          {activeBtn === "customer" && <CustomerList />}
+          {activeBtn === "provider" && <ProviderList />}
         </section>
       </div>
     </div>

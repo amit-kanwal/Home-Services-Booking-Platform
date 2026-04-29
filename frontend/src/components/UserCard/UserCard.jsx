@@ -2,19 +2,8 @@ import React from "react";
 import { Mail, Phone, MapPin, User } from "lucide-react";
 import "./UserCard.css";
 
-const UserCard = ({userOne}) => {
-  const user = {
-    name: "Amit Singh",
-    username: "amitkanwal34",
-    email: "amitkanwal196@gmail.com",
-    contact: "8218788161",
-    address: "Almora",
-    role: "customer",
-    latitude: "29.963600",
-    longitude: "77.546000",
-    id: 41,
-  };
-
+const UserCard = ({user}) => {
+  
   return (
     <div className="user-container">
       <div className="user-card">
