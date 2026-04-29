@@ -3,6 +3,7 @@
   gap: 40px;
   flex-wrap: wrap;
   margin: 20px;
+  
 }
 
 .booking-card {
@@ -10,6 +11,7 @@
   padding: 15px;
   background: #fff;
   width: 400px;
+  box-shadow: 1px 8px 20px rgb(174, 174, 174);
 }
 
 .booking-content {

@@ -45,7 +45,7 @@ function Services() {
       <Navbar />
       <div className="services-top">
         <div className="service-top-heading">
-          <h2 style={{ fontWeight: "500", marginTop: "20px", padding: "0 10px", color: "blue" }}>
+          <h2 style={{ fontWeight: "500", marginTop: "20px", padding: "0 10px"}}>
           {categoryName} Services
         </h2>
         </div >

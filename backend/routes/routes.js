@@ -21,6 +21,7 @@ import { handleChange } from '../controllers/providerInfoChangeController.js'
 import { getProviderBookingInfo } from '../controllers/providerBookingInfoController.js'
 import { getAdmin } from '../controllers/adminController.js'
 import { getAdminProfileData } from '../controllers/adminProfileController.js'
+import { getCustomers } from '../controllers/adminCusotmerList.js'
 
 const router = express.Router()
 
@@ -46,5 +47,6 @@ router.put("/provider/update/:userId", authMiddleware, handleChange)
 router.get("/bookings/provider/:providerId", authMiddleware, getProviderBookingInfo)
 router.get("/adminInfo/:userId", authMiddleware, getAdmin)
 router.get("/admin/profileData", authMiddleware, getAdminProfileData)
+router.get("/admin/customerList", authMiddleware, getCustomers)
 
 export default router;

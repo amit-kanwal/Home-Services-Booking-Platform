@@ -23,14 +23,14 @@ function BusinessInfo({ provider }) {
             <div className="provider-category-heading">
               {provider?.category}
             </div>
-            <div className="provider-info-list provider-name">
+            <div className="provider-info-list provider-name-detail-page">
               {provider?.businessName}
             </div>
-            <div className="provider-info-list provider-detail-icon">
+            <div className="provider-info-list provider-detail-page-icon">
               <MapPin size={18} style={{ color: "red" }} />
               <span>{provider?.address}</span>
             </div>
-            <div className="provider-info-list provider-detail-icon">
+            <div className="provider-info-list provider-detail-page-icon">
               <Mail size={18} style={{ color: "skyblue" }} />
               <span>{provider?.email}</span>
             </div>

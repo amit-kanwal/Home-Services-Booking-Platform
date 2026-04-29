@@ -26,7 +26,7 @@
     margin-left: 10px;
 }
 
-.provider-name{
+.provider-name-detail-page{
     font-size: 1.4rem;
     font-weight: 500;
 }
@@ -44,6 +44,12 @@
     justify-content: space-between;
 }
 
+.provider-detail-page-icon{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
 .provider-detail-icon{
     display: flex;
     justify-content: end;
@@ -88,7 +94,7 @@
         align-items: center;
     }
 
-    .provider-detail-icon{
+    .provider-detail-page-icon{
     display: flex;
     justify-content: center;
     align-items: center;

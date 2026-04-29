@@ -9,6 +9,7 @@
     align-items: center;
     padding: 10px 0 20px;
     margin: 30px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .change-image-heading {
