@@ -22,6 +22,8 @@ import { getProviderBookingInfo } from '../controllers/providerBookingInfoContro
 import { getAdmin } from '../controllers/adminController.js'
 import { getAdminProfileData } from '../controllers/adminProfileController.js'
 import { getCustomers } from '../controllers/adminCusotmerList.js'
+import { getAdminProviderList } from '../controllers/adminProviderListController.js'
+
 
 const router = express.Router()
 
@@ -48,5 +50,6 @@ router.get("/bookings/provider/:providerId", authMiddleware, getProviderBookingI
 router.get("/adminInfo/:userId", authMiddleware, getAdmin)
 router.get("/admin/profileData", authMiddleware, getAdminProfileData)
 router.get("/admin/customerList", authMiddleware, getCustomers)
+router.get("/admin/providerList", authMiddleware, getAdminProviderList)
 
 export default router;

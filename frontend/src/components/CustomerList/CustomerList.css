@@ -5,10 +5,28 @@
     flex-wrap: wrap;
 }
 
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+.page-change-btn{
+    margin: 0 10px;
+    padding: 0 10px;
+}
 @media only screen and (max-width : 575px) {
     .admin-users-grid{
     align-items: center;
     justify-content: center;
+}
+.customer-list-heading{
+    text-align: center;
+}
+}
+
+@media only screen and (max-width : 850px) {
+    .admin-users-grid{
+    align-items: center;
+    justify-content: space-evenly;
 }
 .customer-list-heading{
     text-align: center;

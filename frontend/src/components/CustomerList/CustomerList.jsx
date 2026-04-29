@@ -38,7 +38,7 @@ function CustomerList() {
 
   return (
     <div>
-      <h3 className="customer-list-heading" style={{margin : "10px 20px", fontSize : "1.5rem", fontWeight : "500"}}>All Customers</h3>
+      <h3 className="customer-list-heading" style={{margin : "10px 20px", fontSize : "2rem", fontWeight : "400"}}>All Customers</h3>
     <div className="admin-users-grid">
       {currentUsers.map((customer, index) => (
         <UserCard key={index} customer={customer} user={customer} />

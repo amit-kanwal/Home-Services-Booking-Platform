@@ -35,7 +35,7 @@ const UserCard = ({user}) => {
         </div>
         <div className="user-divider"></div>
         <div className="user-card-footer">
-          <span className="user-role">{user.role}</span>
+          <span className="user-role">{user.role === 'customer' ? user.role : user?.category}</span>
           <span className="user-id">ID: {user.id}</span>
         </div>
       </div>
