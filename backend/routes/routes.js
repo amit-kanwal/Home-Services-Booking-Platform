@@ -26,7 +26,6 @@ import { getAdminProviderList } from '../controllers/adminProviderListController
 import { getFlaggedBookings } from '../controllers/adminFlaggedBookingsController.js'
 import { updateBookingStatus } from '../controllers/adminBookingStatusChangeController.js'
 
-
 const router = express.Router()
 
 router.get('/categories', getCategories)
@@ -55,4 +54,5 @@ router.get("/admin/customerList", authMiddleware, getCustomers)
 router.get("/admin/providerList", authMiddleware, getAdminProviderList)
 router.get("/admin/flaggedBookings", authMiddleware, getFlaggedBookings)
 router.put("/bookings/:id/status",authMiddleware, updateBookingStatus);
+
 export default router;
