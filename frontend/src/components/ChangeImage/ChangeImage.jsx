@@ -100,7 +100,7 @@ function ChangeImage({ image_url, userId, setImageUrl }) {
           <h4 className="image-heading">Upload Image</h4>
           <input
             type="file"
-            accept="image/png"
+            accept="image/*"
             onChange={handleUpload}
             onClick={() => setErrMessage("")}
             style={{ border: imgBorder }}

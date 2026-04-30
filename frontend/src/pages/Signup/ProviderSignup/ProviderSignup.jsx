@@ -2,10 +2,10 @@ import "./ProviderSignup.css";
 import "../Signup.css"
 import GetLocation from "../../../Utils/GetLocation.js";
 import { compressImage } from "../../../Utils/CompressImage.js";
-import { useState, useEffect , useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function ProviderSignup() {
   const [location, setLocation] = useState(null);
@@ -47,12 +47,12 @@ function ProviderSignup() {
   const phoneErr = useRef(null)
   const noLocation = useRef(null)
 
-  const scrollToElement = (ref)=>{
-    if(ref && ref.current){
+  const scrollToElement = (ref) => {
+    if (ref && ref.current) {
       ref.current.scrollIntoView({
-      behavior : "smooth",
-      block : "start"
-    })
+        behavior: "smooth",
+        block: "start"
+      })
     }
   }
 
@@ -124,7 +124,7 @@ function ProviderSignup() {
       return false;
     }
 
-    if(!location){
+    if (!location) {
       newErrors.location = "Location required";
       scrollToElement(noLocation)
       setErrors(newErrors)
@@ -139,7 +139,7 @@ function ProviderSignup() {
   const handleProviderFormSubmit = async (e) => {
     e.preventDefault();
 
-    if(!validateForm()){
+    if (!validateForm()) {
       return;
     }
 
@@ -167,41 +167,41 @@ function ProviderSignup() {
     try {
       const response = await axios.post("/api/providerSignup", data);
       const resData = response.data;
-            localStorage.setItem("token" , resData.token)
-            const user = {
-                id : resData.id,
-                role : resData.role
-            }
-            localStorage.setItem("user", JSON.stringify(user));
-            if(resData.role == 'service_provider'){
-                navigate('/Provider_dashboard')
-            }
+      localStorage.setItem("token", resData.token)
+      const user = {
+        id: resData.id,
+        role: resData.role
+      }
+      localStorage.setItem("user", JSON.stringify(user));
+      if (resData.role == 'service_provider') {
+        navigate('/Provider_dashboard')
+      }
     } catch (err) {
-  let field;
+      let field;
 
-  if (err.response && err.response.data) {
-    field = err.response.data.field;
-  }
+      if (err.response && err.response.data) {
+        field = err.response.data.field;
+      }
 
-  let newErrors = {};
+      let newErrors = {};
 
-  if (field === "username") {
-    newErrors.username = "Username already exists";
-    scrollToElement(usernameErr);
-  } 
-  else if (field === "email") {
-    newErrors.email = "Please provide a different email";
-    scrollToElement(emailErr);
-  } 
-  else if (field === "phone") {
-    newErrors.phone = "Please provide different mobile number";
-    scrollToElement(phoneErr);
-  }
+      if (field === "username") {
+        newErrors.username = "Username already exists";
+        scrollToElement(usernameErr);
+      }
+      else if (field === "email") {
+        newErrors.email = "Please provide a different email";
+        scrollToElement(emailErr);
+      }
+      else if (field === "phone") {
+        newErrors.phone = "Please provide different mobile number";
+        scrollToElement(phoneErr);
+      }
 
-  console.log(err.response?.data);
+      console.log(err.response?.data);
 
-  setErrors(newErrors);
-}
+      setErrors(newErrors);
+    }
   };
 
   return (
@@ -254,7 +254,7 @@ function ProviderSignup() {
               onChange={handleProviderFormDataChange}
             />
           </div>
-          {errors.username && <p style={{color:"red"}}>{errors.username}</p>}
+          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
           <div className="signup-form-element">
             <label htmlFor="password" className="signup-form-label">
               Password<span style={{ color: "red" }}>*</span>
@@ -270,9 +270,9 @@ function ProviderSignup() {
               ref={passowordErr}
             />
           </div>
-          {errors.password && <p style={{color:"red"}}>{errors.password}</p>}
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
           <div className="signup-form-element">
-            <label htmlFor="confirmPassword" className="signup-form-label" ref = {confirmPassowordErr}>
+            <label htmlFor="confirmPassword" className="signup-form-label" ref={confirmPassowordErr}>
               Confirm Password<span style={{ color: "red" }}>*</span>
             </label>
             <input
@@ -285,7 +285,7 @@ function ProviderSignup() {
               onChange={handleProviderFormDataChange}
             />
           </div>
-          {errors.confirmPassword && <p style={{color:"red"}}>{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword}</p>}
           <div className="signup-form-element">
             <label htmlFor="email" className="signup-form-label" ref={emailErr}>
               Email<span style={{ color: "red" }}>*</span>
@@ -300,7 +300,7 @@ function ProviderSignup() {
               onChange={handleProviderFormDataChange}
             />
           </div>
-          {errors.email && <p style={{color:"red"}}>{errors.email}</p>}
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
           <div className="signup-form-element">
             <label htmlFor="contact-number" className="signup-form-label" ref={phoneErr}>
               Phone Number<span style={{ color: "red" }}>*</span>
@@ -316,7 +316,7 @@ function ProviderSignup() {
               required
             />
           </div>
-          {errors.phone && <p style={{color:"red"}}>{errors.phone}</p>}
+          {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
           <div className="signup-form-element">
             <label htmlFor="category" className="signup-form-label">
               Choose Category<span style={{ color: "red" }}>*</span>
@@ -345,7 +345,7 @@ function ProviderSignup() {
               Experience
             </label>
             <select
-            className="choose-category"
+              className="choose-category"
               name="experience"
               id="experience"
               value={formData.experience}
@@ -407,14 +407,14 @@ function ProviderSignup() {
               ref={priceErr}
             />
           </div>
-          {errors.price && <p style={{color:"red"}}>{errors.price}</p>}
+          {errors.price && <p style={{ color: "red" }}>{errors.price}</p>}
           <div className="signup-form-element">
             <div className="location-label">
               <label htmlFor="user-location" className="signup-form-label">
                 Provide Location
                 <span style={{ color: "red" }}>*</span>
               </label>
-              
+
               <p className="location-text">
                 (Provide location for better visibility)
               </p>
@@ -434,14 +434,14 @@ function ProviderSignup() {
             </div>
 
           </div>
-          {errors.location && <p style={{color:"red"}}>{errors.location}</p>}
+          {errors.location && <p style={{ color: "red" }}>{errors.location}</p>}
           <div className="signup-form-element">
             <label htmlFor="imgUpload" className="signup-form-label">
               Upload Image
             </label>
             <input
               type="file"
-              accept="image/png"
+              accept="image/png, image/jpeg, image/jpg"
               onChange={handleUpload}
               style={{ border: imgBorder }}
               className="img-input"
