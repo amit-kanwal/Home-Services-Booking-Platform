@@ -1,0 +1,137 @@
+.flagged-container {
+    padding: 20px;
+    width: 100%;
+    align-self: flex-start;
+}
+
+.flagged-title {
+    margin-bottom: 20px;
+    align-self: start;
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    gap: 5px;
+}
+
+.flagged-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.flagged-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 1px 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.flagged-section {
+    margin-bottom: 10px;
+}
+
+.flagged-section h4 {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.seven-plus {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.no-data {
+    color: black;
+}
+
+.flagged-loading {
+    text-align: center;
+    padding: 20px;
+}
+
+.flagged-section h4,
+.flagged-section p,
+.flagged-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.flagged-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.complete-btn-flagged {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 30px;
+}
+
+.cancel-btn-flagged {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 30px;
+}
+
+.complete-btn:hover {
+    background: #219150;
+}
+
+.cancel-btn:hover {
+    background: #c0392b;
+}
+
+@media only screen and (max-width : 535px) {
+    .flagged-title {
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .flagged-grid {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width : 250px) {
+    .flagged-card {
+        width: 90%;
+    }
+
+    .flagged-section p {
+        font-size: 14px;
+    }
+
+    .flagged-title {
+        font-size: 1.2rem;
+        align-items: center;
+    }
+
+    .seven-plus {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .flagged-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}

@@ -38,7 +38,7 @@ function NavLogin() {
 
   return (
     <>
-      <nav>
+      <nav className="nav-login-bar">
         <div className="logoContainer">
           <img src={logo} alt="logo" />
           <span className="logo">SERVEASE</span>
